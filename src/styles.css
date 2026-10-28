@@ -1886,7 +1886,7 @@ h3 {
   flex-direction: column;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: calc(var(--topbar) + env(safe-area-inset-top) + 28px) var(--gutter) calc(28px + env(safe-area-inset-bottom));
+  padding: calc(var(--topbar) + env(safe-area-inset-top) + 20px) var(--gutter) calc(20px + env(safe-area-inset-bottom));
   color: #fff;
   background:
     repeating-linear-gradient(180deg, transparent 0 11.11%, rgba(255, 255, 255, 0.035) 11.11% 22.22%),
@@ -1904,7 +1904,7 @@ h3 {
 
 .welcome__title {
   margin-top: 6px;
-  font-size: clamp(44px, 12vw, 68px);
+  font-size: clamp(36px, 10vw, 68px);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: 0.01em;
@@ -1912,24 +1912,25 @@ h3 {
 }
 
 .welcome__text {
-  margin: 12px 0 0;
+  margin: 10px 0 0;
+  font-size: 15px;
   color: rgba(255, 255, 255, 0.86);
 }
 
 .welcome__list {
   list-style: none;
-  margin: 22px 0 0;
+  margin: 16px 0 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .welcome__item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  padding: 12px 14px;
-  border-radius: 14px;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
   /* Solid, so the stripes behind do not show through. */
   background: #172c4b;
   border: 1px solid #2a4266;
@@ -1955,7 +1956,7 @@ h3 {
 .welcome__item strong {
   display: block;
   font-family: var(--head);
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.15;
 }
@@ -1964,9 +1965,9 @@ h3 {
   flex: none;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: rgba(243, 211, 107, 0.14);
   border: 1px solid rgba(243, 211, 107, 0.3);
   color: var(--gold-2);
@@ -1974,14 +1975,14 @@ h3 {
 
 .welcome__desc {
   display: block;
-  margin-top: 3px;
-  font-size: 14.5px;
-  line-height: 1.45;
+  margin-top: 2px;
+  font-size: 13.5px;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.74);
 }
 
 .welcome__start {
-  margin-top: 24px;
+  margin-top: 18px;
 }
 
 .welcome__credit {
@@ -2201,7 +2202,7 @@ h3 {
 
 /* Room for the ticker under the navbar. */
 :root:has(.ticker) .welcome {
-  padding-top: calc(var(--topbar) + env(safe-area-inset-top) + 34px + 28px);
+  padding-top: calc(var(--topbar) + env(safe-area-inset-top) + 34px + 20px);
 }
 
 :root:has(.ticker) .quiz__bar {
@@ -2214,8 +2215,49 @@ h3 {
     --gutter: 24px;
   }
 
+  .welcome {
+    padding-top: calc(var(--topbar) + env(safe-area-inset-top) + 28px);
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+  }
+
+  :root:has(.ticker) .welcome {
+    padding-top: calc(var(--topbar) + env(safe-area-inset-top) + 34px + 28px);
+  }
+
   .welcome__text {
+    margin-top: 12px;
     font-size: 18px;
+  }
+
+  .welcome__list {
+    margin-top: 22px;
+    gap: 10px;
+  }
+
+  .welcome__item {
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .welcome__item strong {
+    font-size: 19px;
+  }
+
+  .welcome__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .welcome__desc {
+    margin-top: 3px;
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+
+  .welcome__start {
+    margin-top: 24px;
   }
 
   .hero__inner {
