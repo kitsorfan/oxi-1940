@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { About } from './components/About';
 import { Home } from './components/Home';
 import { FlagMark, SoundIcon } from './components/Icons';
+import { RadioButton, RadioTicker, useRadio } from './components/NavRadio';
 import { Quiz, type AnswerRecord } from './components/Quiz';
 import { Results } from './components/Results';
 import { Welcome, isWelcomeSeen } from './components/Welcome';
@@ -26,7 +27,10 @@ export function App() {
   const [screen, setScreen] = useState<Screen>({ name: 'home' });
   const [progress, setProgress] = useState<Progress>(loadProgress);
   const [muted, setMutedState] = useState(isMuted);
-  const [welcome, setWelcome] = useState(() => !isWelcomeSeen());
+  const [firstVisit] = useState(() => !isWelcomeSeen());
+  const [welcome, setWelcome] = useState(firstVisit);
+  // On a first visit the 1940 broadcast greets the player; afterwards it plays from the navbar.
+  const radio = useRadio(firstVisit);
   const chooseLang = (l: Lang) => {
     rememberLang(l);
     setLangState(l);
@@ -68,6 +72,8 @@ export function App() {
   };
 
   const start = (modeId: string) => {
+    // The broadcast ends as the player heads to the front, so the bugle is not drowned out.
+    if (radio.state !== 'off') radio.stop();
     void sfx.start();
     go({ name: 'quiz', modeId, round: buildRound(modeId, chapters), run: Date.now() });
   };
@@ -97,6 +103,7 @@ export function App() {
             <span className="brand__name">{strings.appName[lang]}</span>
           </button>
           <div className="topbar__tools">
+            <RadioButton radio={radio} />
             <button
               type="button"
               className="sound-btn"
@@ -116,6 +123,7 @@ export function App() {
             </div>
           </div>
         </div>
+        {radio.state !== 'off' && <RadioTicker radio={radio} />}
       </header>
 
       <main className={`main main--${screen.name}`}>

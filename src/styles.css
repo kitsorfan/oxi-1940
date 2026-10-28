@@ -1796,9 +1796,23 @@ h3 {
   }
 }
 
-@keyframes hum {
-  50% {
-    transform: rotate(-1.5deg) scale(1.02);
+@keyframes waves {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(6px) scale(1.1);
+  }
+}
+
+@keyframes slide-line {
+  to {
+    transform: translateX(var(--shift));
   }
 }
 
@@ -1987,147 +2001,144 @@ h3 {
   text-decoration: underline;
 }
 
-/* ---------- Radio Athens, 1940 ---------- */
-.radio {
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 14px;
-  background: #1b2c44;
-  border: 1px solid rgba(243, 211, 107, 0.35);
-  animation: rise 0.45s ease both 0.5s;
-}
-
-.radio__head {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.radio__heading {
-  font-family: var(--head);
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.02em;
-  color: var(--gold-2);
-}
-
-/* The line being read lights up; the others dim while the set is on. */
-.radio--playing .radio__text p {
-  opacity: 0.45;
-  transition: opacity 0.4s ease;
-}
-
-.radio--playing .radio__text p.radio__line--on {
-  opacity: 1;
-}
-
-.radio__set {
+/* ---------- Radio Athens, 1940: a set in the navbar and an on-air ticker ---------- */
+.radio-btn {
   position: relative;
-  flex: none;
-  padding: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
   border: 0;
-  background: none;
-  transition: transform 0.15s ease;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.15s ease;
 }
 
-.radio__set:hover {
-  transform: scale(1.05);
+.radio-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
 }
 
-.radio__case {
-  fill: #6b4423;
-  stroke: #3d2412;
-  stroke-width: 2;
+.radio-btn__case {
+  fill: #8a5a2e;
+  stroke: #e9d9b4;
+  stroke-width: 3;
 }
 
-.radio__antenna {
-  stroke: #c9b48a;
-  stroke-width: 2;
+.radio-btn__antenna {
+  stroke: #e9d9b4;
+  stroke-width: 3;
   stroke-linecap: round;
 }
 
-.radio__grille {
+.radio-btn__grille {
   fill: #e9d9b4;
-  stroke: #3d2412;
-  stroke-width: 1.5;
 }
 
-.radio__slot {
-  stroke: #8a6a3f;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-}
-
-.radio__dial {
+.radio-btn__dial {
   fill: #f3d36b;
-  stroke: #3d2412;
-  stroke-width: 1.2;
 }
 
-.radio__knob {
+.radio-btn__knob {
   fill: #2a1a0d;
-  stroke: #c9b48a;
-  stroke-width: 1.2;
+  stroke: #e9d9b4;
+  stroke-width: 2;
 }
 
-.radio--playing .radio__dial {
-  fill: #ffe9a3;
+.radio-btn--on {
+  background: rgba(243, 211, 107, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(243, 211, 107, 0.6);
+}
+
+.radio-btn--on .radio-btn__dial {
+  fill: #fff1b8;
   filter: drop-shadow(0 0 3px #f3d36b);
 }
 
-.radio--playing .radio__set {
-  animation: hum 0.9s ease-in-out infinite;
-}
-
-.radio__play {
+/* The red on-air light on the set. */
+.radio-btn--on::after {
+  content: '';
   position: absolute;
-  right: -6px;
-  bottom: -6px;
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
-  background: var(--gold);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  background: #e5484d;
+  box-shadow: 0 0 0 2px var(--navy);
+  animation: pulse 1s ease-in-out infinite;
 }
 
-.radio__play svg {
-  fill: var(--navy);
+/* Sound waves rippling out of the set while it plays. */
+.radio-btn__waves,
+.radio-btn__waves::before {
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  width: 6px;
+  height: 12px;
+  margin-top: -6px;
+  border: 2px solid var(--gold-2);
+  border-left: 0;
+  border-radius: 0 50% 50% 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.radio__body {
-  flex: 1;
-  min-width: 0;
+.radio-btn__waves::before {
+  content: '';
+  top: -4px;
+  right: -5px;
+  width: 9px;
+  height: 18px;
+  margin-top: 0;
 }
 
-.radio__title {
+.radio-btn--on .radio-btn__waves,
+.radio-btn--on .radio-btn__waves::before {
+  animation: waves 1.4s ease-out infinite;
+}
+
+.radio-btn--on .radio-btn__waves::before {
+  animation-delay: 0.35s;
+}
+
+.ticker {
+  background: #061a33;
+  border-top: 1px solid rgba(243, 211, 107, 0.25);
+  animation: fade 0.3s ease both;
+}
+
+.ticker__inner {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 6px 10px;
-  margin: 0;
+  gap: 10px;
+  max-width: 1120px;
+  height: 34px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.ticker__light,
+.ticker__station {
+  flex: none;
   font-family: var(--head);
   font-weight: 700;
-  font-size: 17px;
-  line-height: 1.2;
-  color: #fff;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.radio__onair {
+.ticker__light {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 1px 8px;
   border-radius: 999px;
   background: #b3261e;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: #fff;
 }
 
-.radio__onair::before {
+.ticker__light::before {
   content: '';
   width: 7px;
   height: 7px;
@@ -2136,50 +2147,65 @@ h3 {
   animation: pulse 1s ease-in-out infinite;
 }
 
-.radio__cta {
-  margin-top: 4px;
-  padding: 0;
-  border: 0;
-  background: none;
+.ticker__station {
   color: var(--gold-2);
-  font-family: var(--head);
-  font-weight: 700;
-  font-size: 16px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
-.radio__cta:hover {
-  color: #fff;
+.ticker__box {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
 }
 
-.radio__text {
-  margin: 8px 0 0;
-  padding: 0 0 0 12px;
-  border-left: 3px solid var(--gold);
+.ticker__text {
+  display: inline-block;
   font-style: italic;
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
   color: #f4ecd8;
+  animation: fade 0.4s ease both;
 }
 
-.radio__text p {
-  margin: 0 0 6px;
-  animation: fade 0.5s ease both;
-}
-
-.radio__en {
-  display: block;
+.ticker--waiting .ticker__text {
   font-style: normal;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.72);
 }
 
-.radio__note {
-  margin: 8px 0 0;
-  font-size: 12.5px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.5);
+/* A line longer than the strip slides left after a moment, at about reading pace. */
+.ticker__text--slide {
+  animation:
+    fade 0.4s ease both,
+    slide-line var(--slide) linear 1.2s forwards;
+}
+
+.ticker__btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(243, 211, 107, 0.6);
+  border-radius: 999px;
+  background: transparent;
+}
+
+.ticker__btn svg {
+  fill: var(--gold-2);
+}
+
+.ticker__btn:hover {
+  background: rgba(243, 211, 107, 0.15);
+}
+
+/* Room for the ticker under the navbar. */
+:root:has(.ticker) .welcome {
+  padding-top: calc(var(--topbar) + env(safe-area-inset-top) + 34px + 28px);
+}
+
+:root:has(.ticker) .quiz__bar {
+  top: calc(var(--topbar) + env(safe-area-inset-top) + 35px);
 }
 
 /* ---------- Larger screens ---------- */

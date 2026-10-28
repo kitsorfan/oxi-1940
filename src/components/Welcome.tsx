@@ -1,10 +1,10 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
+import { RECORDING } from '../game/radio';
 import { sfx } from '../game/sound';
 import { useLang } from '../i18n/LangContext';
 import { AUTHOR_URL } from '../i18n/strings';
 import { ArrowIcon, PinIcon, SplitIcon, StarIcon } from './Icons';
 import { MedalBadge } from './MedalBadge';
-import { RadioBulletin } from './RadioBulletin';
 
 const SEEN_KEY = 'oxi1940:welcomed';
 
@@ -71,12 +71,16 @@ export function Welcome({ onClose }: { onClose: () => void }) {
             </li>
           ))}
         </ul>
-        <RadioBulletin />
         <button ref={startRef} type="button" className="btn btn--gold btn--lg btn--block welcome__start" onClick={close}>
           {s('welcomeStart')} <ArrowIcon />
         </button>
         <p className="welcome__credit">
           {s('madeBy')} Kitsos Orfanopoulos (<a href={AUTHOR_URL}>www.kitsorfan.com</a>)
+          <br />
+          {s('radioSource')}{' '}
+          <a href={RECORDING.youtube} target="_blank" rel="noreferrer">
+            YouTube
+          </a>
         </p>
       </div>
     </div>

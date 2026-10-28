@@ -21,8 +21,24 @@ function readMuted(): boolean {
 
 export const isMuted = () => muted;
 
+let radioOn = false;
+
+/** While the 1940 broadcast plays, the bugle calls that would talk over it stay quiet. */
+export function setRadioOn(value: boolean) {
+  radioOn = value;
+}
+
+const muteListeners = new Set<(muted: boolean) => void>();
+
+/** Lets players outside this module (the 1940 radio) follow the mute button. */
+export function onMuteChange(listener: (muted: boolean) => void): () => void {
+  muteListeners.add(listener);
+  return () => muteListeners.delete(listener);
+}
+
 export function setMuted(value: boolean) {
   muted = value;
+  muteListeners.forEach((listener) => listener(value));
   try {
     localStorage.setItem(MUTE_KEY, value ? '1' : '0');
   } catch {
@@ -225,8 +241,9 @@ export const sfx = {
       [C5, 0.22],
       [G4, 0.6],
     ]),
-  /** A rising call as the player leaves the welcome screen. */
+  /** A rising call as the player leaves the welcome screen, unless the radio is on. */
   ready: () =>
+    radioOn ||
     bugleCall([
       [C5, 0.14],
       [E5, 0.14],
