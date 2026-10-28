@@ -40,7 +40,7 @@ On 28 October 1940 Greece answered Mussolini’s ultimatum with a single word: *
 | --- | --- | --- | --- |
 | 1 | The Road to OXI · *Ο δρόμος προς το ΟΧΙ* | 1923 – 28 Oct 1940 | Corfu 1923, the torpedoing of *Elli*, the night of the ultimatum, Ochi Day today |
 | 2 | Pindus & the Counter-attack · *Πίνδος και αντεπίθεση* | Oct – Dec 1940 | Davakis and the Julia Division, Kalpaki, the women of the Pindus, Sofia Vembo, Korytsa |
-| 3 | The Winter Front · *Το αλβανικό μέτωπο* | Nov 1940 – Apr 1941 | Mitralexis, the submarine *Papanikolis*, frostbite, Klisura, Elytis, the Spring Offensive |
+| 3 | The Albanian Front · *Το αλβανικό μέτωπο* | Nov 1940 – Apr 1941 | Mitralexis, the submarine *Papanikolis*, frostbite, Klisura, Elytis, the Spring Offensive |
 | 4 | Invasion & Crete · *Εισβολή και Κρήτη* | Apr – Jun 1941 | Operation Marita, Fort Rupel, Thermopylae, *Averof*, the Battle of Crete |
 | 5 | Occupation & Liberation · *Κατοχή και Απελευθέρωση* | 1941 – 1945 | Glezos and Santas, the famine, Palamas’ funeral, Gorgopotamos, the Holocaust in Thessaloniki, Rimini, liberation |
 

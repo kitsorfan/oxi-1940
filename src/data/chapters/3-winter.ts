@@ -3,7 +3,7 @@ import { choice, map, t } from '../helpers';
 
 export const winter: Chapter = {
   id: 'winter',
-  title: t('The Winter Front', 'Το αλβανικό μέτωπο'),
+  title: t('The Albanian Front', 'Το αλβανικό μέτωπο'),
   period: t('November 1940 – April 1941', 'Νοέμβριος 1940 – Απρίλιος 1941'),
   blurb: t(
     'Snow and frostbite, the Spring Offensive, and heroes in the air and at sea.',
