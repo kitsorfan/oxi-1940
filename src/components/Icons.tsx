@@ -38,6 +38,33 @@ export const SplitIcon = (p: IconProps) => (
   </svg>
 );
 
+/** Three soldiers' heads: the company. */
+export const CompanyIcon = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="7.5" r="3" />
+    <path d="M6.5 20a5.5 5.5 0 0 1 11 0" />
+    <circle cx="5" cy="10" r="2.2" />
+    <path d="M1.5 19a4 4 0 0 1 4.6-4.3" />
+    <circle cx="19" cy="10" r="2.2" />
+    <path d="M22.5 19a4 4 0 0 0-4.6-4.3" />
+  </svg>
+);
+
+export const RetryIcon = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M4 12a8 8 0 1 0 2.4-5.7" />
+    <path d="M4 4v4.5h4.5" />
+  </svg>
+);
+
+/** A telegram envelope. */
+export const TelegramIcon = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <rect x="3" y="5.5" width="18" height="13" rx="2" />
+    <path d="m3.5 7 8.5 6 8.5-6" />
+  </svg>
+);
+
 export const CheckIcon = (p: IconProps) => (
   <svg {...base} {...p}>
     <path d="m5 12.5 4.5 4.5L19 7.5" />

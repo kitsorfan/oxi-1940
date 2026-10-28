@@ -1,12 +1,23 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { fiftyFifty, mapSplit, pointsFor, type MapSplit, type RoundItem } from '../game/engine';
-import { distanceKm, project, unproject, type Point } from '../game/geo';
+import { useCallback, useEffect, useRef, useState, type ComponentType, type CSSProperties, type SVGProps } from 'react';
+import { companyGuesses, companyPoll, fiftyFifty, mapSplit, pointsFor, type Help, type MapSplit, type RoundItem } from '../game/engine';
+import { compassTo, distanceKm, project, unproject, type Compass, type Point } from '../game/geo';
 import { sfx } from '../game/sound';
 import { useLang } from '../i18n/LangContext';
-import { fill, strings } from '../i18n/strings';
+import { fill, strings, type StringKey } from '../i18n/strings';
 import type { L } from '../types';
 import { Figure } from './Figure';
-import { ArrowIcon, CheckIcon, CrossIcon, FlameIcon, PinIcon, SplitIcon, StarIcon } from './Icons';
+import {
+  ArrowIcon,
+  CheckIcon,
+  CompanyIcon,
+  CrossIcon,
+  FlameIcon,
+  PinIcon,
+  RetryIcon,
+  SplitIcon,
+  StarIcon,
+  TelegramIcon,
+} from './Icons';
 import { MapPicker } from './MapPicker';
 
 export interface AnswerRecord {
@@ -24,6 +35,17 @@ interface Props {
   onFinish: (records: AnswerRecord[], points: number) => void;
 }
 
+type UiKey = Exclude<StringKey, 'correct' | 'wrong'>;
+
+const HELPS: { id: Help; Icon: ComponentType<SVGProps<SVGSVGElement>>; label: UiKey; hint: UiKey; mapHint: UiKey }[] = [
+  { id: 'fifty', Icon: SplitIcon, label: 'fifty', hint: 'fiftyHint', mapHint: 'fiftyMapHint' },
+  { id: 'poll', Icon: CompanyIcon, label: 'poll', hint: 'pollHint', mapHint: 'pollMapHint' },
+  { id: 'second', Icon: RetryIcon, label: 'second', hint: 'secondHint', mapHint: 'secondMapHint' },
+  { id: 'telegram', Icon: TelegramIcon, label: 'telegram', hint: 'telegramHint', mapHint: 'telegramHint' },
+];
+
+const DIRECTIONS: Record<Compass, UiKey> = { n: 'dirN', ne: 'dirNE', e: 'dirE', se: 'dirSE', s: 'dirS', sw: 'dirSW', w: 'dirW', nw: 'dirNW' };
+
 const LETTERS = ['A', 'B', 'C', 'D'];
 const randomOf = <T,>(list: readonly T[]) => list[Math.floor(Math.random() * list.length)]!;
 
@@ -33,9 +55,17 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
   const [records, setRecords] = useState<AnswerRecord[]>([]);
   const [points, setPoints] = useState(0);
   const [streak, setStreak] = useState(0);
-  const [fiftyUsedAt, setFiftyUsedAt] = useState<number | null>(null);
+  /** The question each help was used on. */
+  const [used, setUsed] = useState<Partial<Record<Help, number>>>({});
   const [removed, setRemoved] = useState<number[]>([]);
   const [split, setSplit] = useState<MapSplit | null>(null);
+  const [poll, setPoll] = useState<number[] | null>(null);
+  const [crowd, setCrowd] = useState<Point[] | null>(null);
+  /** The wrong option the Second chance struck out. */
+  const [struck, setStruck] = useState<number | null>(null);
+  /** The pin the Second chance caught, how far off it was and which way the target lies. */
+  const [firstTry, setFirstTry] = useState<{ pin: Point; km: number; dir: Compass } | null>(null);
+  const [hovered, setHovered] = useState<Help | null>(null);
   const [picked, setPicked] = useState<number | null>(null);
   const [guess, setGuess] = useState<Point | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -45,12 +75,14 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
 
   const item = round[index]!;
   const isLast = index === round.length - 1;
-  const usedFiftyHere = fiftyUsedAt === index;
+  const armed = used.second === index;
+  // An armed Second chance only costs points once it has caught a wrong answer.
+  const helped = struck !== null || firstTry !== null || used.fifty === index || used.poll === index || used.telegram === index;
 
   const settle = useCallback(
     (ok: boolean, km?: number) => {
       const nextStreak = ok ? streak + 1 : 0;
-      const gained = pointsFor(ok, nextStreak, usedFiftyHere);
+      const gained = pointsFor(ok, nextStreak, helped);
       const answer: L = item.kind === 'choice' ? item.question.answer : item.question.place;
       if (!ok) sfx.wrong();
       else if (nextStreak % 3 === 0) sfx.streak();
@@ -61,30 +93,50 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
       setVerdict({ ok, gained, km, text: pick(randomOf(ok ? strings.correct : strings.wrong)) });
       setRevealed(true);
     },
-    [item, streak, usedFiftyHere, pick],
+    [item, streak, helped, pick],
   );
 
   const choose = useCallback(
     (i: number) => {
-      if (revealed || item.kind !== 'choice' || removed.includes(i)) return;
+      if (revealed || item.kind !== 'choice' || removed.includes(i) || i === struck) return;
+      if (i !== item.correct && armed && struck === null) {
+        setStruck(i);
+        sfx.miss();
+        return;
+      }
       setPicked(i);
       settle(i === item.correct);
     },
-    [revealed, item, removed, settle],
+    [revealed, item, removed, struck, armed, settle],
   );
 
   const confirmGuess = useCallback(() => {
     if (revealed || item.kind !== 'map' || !guess) return;
-    const km = Math.round(distanceKm(unproject(guess), item.question));
-    settle(km <= item.question.radiusKm, km);
-  }, [revealed, item, guess, settle]);
+    const at = unproject(guess);
+    const km = Math.round(distanceKm(at, item.question));
+    const ok = km <= item.question.radiusKm;
+    if (!ok && armed && !firstTry) {
+      setFirstTry({ pin: guess, km, dir: compassTo(at, item.question) });
+      setGuess(null);
+      sfx.miss();
+      return;
+    }
+    settle(ok, km);
+  }, [revealed, item, guess, armed, firstTry, settle]);
 
-  const useFifty = () => {
-    if (fiftyUsedAt !== null || revealed) return;
-    setFiftyUsedAt(index);
-    sfx.fifty();
-    if (item.kind === 'choice') setRemoved(fiftyFifty(item));
-    else setSplit(mapSplit(project(item.question.lat, item.question.lon)));
+  const takeHelp = (help: Help) => {
+    if (used[help] !== undefined || revealed) return;
+    setUsed((u) => ({ ...u, [help]: index }));
+    setHovered(null);
+    if (help === 'telegram') sfx.telegram();
+    else sfx.help();
+    if (help === 'fifty') {
+      if (item.kind === 'choice') setRemoved(fiftyFifty(item));
+      else setSplit(mapSplit(project(item.question.lat, item.question.lon)));
+    } else if (help === 'poll') {
+      if (item.kind === 'choice') setPoll(companyPoll(item, removed));
+      else setCrowd(companyGuesses(item.question));
+    }
   };
 
   const next = useCallback(() => {
@@ -99,6 +151,10 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
     setGuess(null);
     setRemoved([]);
     setSplit(null);
+    setPoll(null);
+    setCrowd(null);
+    setStruck(null);
+    setFirstTry(null);
     setRevealed(false);
     setVerdict(null);
     cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -128,6 +184,17 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
   };
 
   const image = item.kind === 'choice' ? ((lang === 'el' && item.question.imageEl) || item.question.image) : undefined;
+  const hintFor = (help: (typeof HELPS)[number]) => s(item.kind === 'map' ? help.mapHint : help.hint);
+  const hoveredHelp = HELPS.find((h) => h.id === hovered);
+
+  const retryNote = !revealed && (struck !== null || firstTry) && (
+    <p className="retry" role="status">
+      <RetryIcon />
+      {firstTry
+        ? fill(s('secondMapRetry'), { km: Math.round(firstTry.km / 10) * 10, dir: s(DIRECTIONS[firstTry.dir]) })
+        : s('secondRetry')}
+    </p>
+  );
 
   return (
     <div className="quiz">
@@ -176,31 +243,51 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
           </p>
           <h2 className="question__prompt">{pick(item.question.prompt)}</h2>
 
+          {used.telegram === index && (
+            <div className="telegram" role="note">
+              <p className="telegram__from">
+                <TelegramIcon width={18} height={18} /> {s('telegramFrom')}
+              </p>
+              <p className="telegram__text">
+                {pick(item.question.hint)} <span className="telegram__stop">{s('telegramStop')}</span>
+              </p>
+            </div>
+          )}
+
           {item.kind === 'choice' ? (
-            <ul className="options">
-              {item.options.map((opt, i) => {
-                const gone = removed.includes(i);
-                let state = '';
-                if (revealed && i === item.correct) state = 'option--correct';
-                else if (revealed && i === picked) state = 'option--wrong';
-                else if (revealed) state = 'option--dim';
-                return (
-                  <li key={i}>
-                    <button
-                      type="button"
-                      className={`option ${state} ${gone ? 'option--gone' : ''}`}
-                      onClick={() => choose(i)}
-                      disabled={revealed || gone}
-                    >
-                      <span className="option__letter">{LETTERS[i]}</span>
-                      <span className="option__text">{pick(opt)}</span>
-                      {revealed && i === item.correct && <CheckIcon className="option__mark" />}
-                      {revealed && i === picked && i !== item.correct && <CrossIcon className="option__mark" />}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+            <>
+              <ul className="options">
+                {item.options.map((opt, i) => {
+                  const gone = removed.includes(i);
+                  const crossed = (revealed && i === picked && i !== item.correct) || i === struck;
+                  let state = '';
+                  if (revealed && i === item.correct) state = 'option--correct';
+                  else if (crossed) state = 'option--wrong';
+                  else if (revealed) state = 'option--dim';
+                  return (
+                    <li key={i}>
+                      <button
+                        type="button"
+                        className={`option ${state} ${gone ? 'option--gone' : ''}`}
+                        onClick={() => choose(i)}
+                        disabled={revealed || gone || i === struck}
+                      >
+                        <span className="option__letter">{LETTERS[i]}</span>
+                        <span className="option__text">{pick(opt)}</span>
+                        {poll && (
+                          <span className="option__poll" style={{ '--share': `${poll[i]}%` } as CSSProperties}>
+                            {poll[i]}%
+                          </span>
+                        )}
+                        {revealed && i === item.correct && <CheckIcon className="option__mark" />}
+                        {crossed && <CrossIcon className="option__mark" />}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+              {retryNote}
+            </>
           ) : (
             <>
               <MapPicker
@@ -208,11 +295,15 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
                 guess={guess}
                 revealed={revealed}
                 split={split}
+                crowd={crowd}
+                firstTry={firstTry?.pin ?? null}
                 onGuess={(p) => {
                   sfx.pin();
                   setGuess(p);
                 }}
               />
+              {crowd && <p className="map-legend">{s('pollLegend')}</p>}
+              {retryNote}
               {!revealed && (
                 <button type="button" className="btn btn--primary btn--block" onClick={confirmGuess} disabled={!guess}>
                   <PinIcon /> {s('mapConfirm')}
@@ -223,20 +314,36 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
 
           {!revealed && (
             <div className="lifeline">
-              <button
-                type="button"
-                className="lifeline__btn"
-                onClick={useFifty}
-                disabled={fiftyUsedAt !== null}
-                aria-describedby="fifty-hint"
-              >
-                <SplitIcon /> {fiftyUsedAt !== null ? s('fiftyUsed') : s('fifty')}
-              </button>
-              {fiftyUsedAt === null && (
-                <span id="fifty-hint" className="lifeline__hint">
-                  {item.kind === 'map' ? s('fiftyMapHint') : s('fiftyHint')}
+              <div className="lifeline__btns">
+                {HELPS.map((help) => {
+                  const { id, Icon } = help;
+                  const taken = used[id] !== undefined;
+                  const on = id === 'second' && armed;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      className={`lifeline__btn ${on ? 'lifeline__btn--on' : ''}`}
+                      onClick={() => takeHelp(id)}
+                      disabled={taken}
+                      aria-pressed={id === 'second' ? on : undefined}
+                      aria-describedby={`help-${id}`}
+                      onMouseEnter={() => setHovered(id)}
+                      onMouseLeave={() => setHovered(null)}
+                      onFocus={() => setHovered(id)}
+                      onBlur={() => setHovered(null)}
+                    >
+                      {taken && !on ? <CheckIcon /> : <Icon />} {s(help.label)}
+                    </button>
+                  );
+                })}
+              </div>
+              {HELPS.map((help) => (
+                <span key={help.id} id={`help-${help.id}`} className="sr-only">
+                  {hintFor(help)}
                 </span>
-              )}
+              ))}
+              <p className="lifeline__hint">{hoveredHelp ? hintFor(hoveredHelp) : s('helpsRule')}</p>
             </div>
           )}
         </div>

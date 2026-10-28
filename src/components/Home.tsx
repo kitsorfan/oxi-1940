@@ -1,11 +1,15 @@
 import { chapters } from '../data/chapters';
+import { images, type ImageSlug } from '../data/images';
 import { MIXED_ID, ROUND_SIZE } from '../game/engine';
 import type { Progress } from '../game/progress';
 import { useLang } from '../i18n/LangContext';
 import { imageUrl } from './Figure';
-import { ArrowIcon, PinIcon, SplitIcon, StarIcon } from './Icons';
+import { ArrowIcon } from './Icons';
 import { MedalBadge } from './MedalBadge';
 import { ShareMenu } from './ShareMenu';
+
+/** Back to front. */
+const HERO_PRINTS: ImageSlug[] = ['newspaper', 'soldier-mother', 'italian-winter'];
 
 interface Props {
   progress: Progress;
@@ -26,31 +30,51 @@ export function Home({ progress, onPlay }: Props) {
     <div className="home">
       <section className="hero">
         <div className="hero__inner">
-          <p className="hero__eyebrow">28 · X · 1940</p>
-          <h1 className="hero__title">
-            <span className="hero__oxi">ΟΧΙ</span>
-            <span className="hero__sub">{s('tagline')}</span>
-          </h1>
-          <p className="hero__text">{s('heroText')}</p>
-          <ul className="rules">
-            <li>
-              <StarIcon /> {s('ruleQuestions')}
-            </li>
-            <li>
-              <SplitIcon /> {s('ruleLifeline')}
-            </li>
-            <li>
-              <PinIcon /> {s('ruleMaps')}
-            </li>
-            <li>
-              <MedalBadge medal="gold" size={16} /> {s('ruleMedals')}
-            </li>
-          </ul>
-          <div className="hero__cta">
-            <ShareMenu text={s('shareInvite')} className="btn btn--outline-light btn--lg" label={s('shareGame')} />
-            <button type="button" className="btn btn--gold btn--lg" onClick={() => onPlay(MIXED_ID)}>
-              {s('heroTitle')} <ArrowIcon />
-            </button>
+          <div className="hero__copy">
+            <p className="hero__eyebrow">28 · X · 1940</p>
+            <h1 className="hero__title">
+              <span className="hero__oxi">ΟΧΙ</span>
+              <span className="hero__sub">{s('tagline')}</span>
+            </h1>
+            <p className="hero__text">{s('heroText')}</p>
+            <ul className="facts">
+              <li>
+                <strong>{ROUND_SIZE}</strong> <span>{s('factQuestions')}</span>
+              </li>
+              <li>
+                <strong>4</strong> <span>{s('factLifeline')}</span>
+              </li>
+              <li>
+                <strong>{Object.keys(images).length}</strong> <span>{s('factPhotos')}</span>
+              </li>
+              <li>
+                <strong>18+</strong> <span>{s('factMedal')}</span>
+              </li>
+            </ul>
+            <div className="hero__cta">
+              <button type="button" className="btn btn--gold btn--lg" onClick={() => onPlay(MIXED_ID)}>
+                {s('heroTitle')} <ArrowIcon />
+              </button>
+              <ShareMenu text={s('shareInvite')} className="btn btn--outline-light btn--lg" label={s('shareGame')} />
+            </div>
+          </div>
+          {/* A fan of archive prints for wide screens; lazy, so phones that hide it never download it. */}
+          <div className="hero__art" aria-hidden="true">
+            {HERO_PRINTS.map((slug) => (
+              <img
+                key={slug}
+                className={`print print--${slug}`}
+                src={imageUrl(slug)}
+                width={images[slug].width}
+                height={images[slug].height}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            ))}
+            <span className="hero__medal">
+              <MedalBadge medal="gold" size={64} />
+            </span>
           </div>
         </div>
       </section>

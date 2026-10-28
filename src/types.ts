@@ -8,6 +8,8 @@ export type L = Record<Lang, string>;
 interface BaseQuestion {
   id: string;
   prompt: L;
+  /** The clue the Telegram help shows: it points the way without giving the answer. */
+  hint: L;
   /** Shown after answering: the history behind the question. */
   fact: L;
 }

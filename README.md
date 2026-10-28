@@ -21,7 +21,11 @@ On 28 October 1940 Greece answered Mussolini’s ultimatum with a single word: *
 - **100 questions** in five chronological chapters of 20, plus a *Grand Challenge* that draws 20 at random from all of them.
 - **Real photos and maps** from Wikimedia Commons, with the story behind every answer.
 - **Find-it-on-the-map** questions: tap the relief map of Greece and see how many kilometres you were off.
-- **One 50:50 lifeline per game.** It removes two wrong answers, or on map questions shades the half of the map without the target.
+- **Four helps, each once per game:**
+  - **50:50** removes two wrong answers, or on map questions shades the half of the map without the target.
+  - **Ask the company** shows how your company votes, or on map questions where they would drop their pins. Usually they’re right, not always.
+  - **Second chance** is turned on before you answer. If you pick wrong, you pick again; if you miss on the map, you learn how far off you were and which way to go.
+  - **Telegram from HQ** sends a one-line clue written for each of the 100 questions.
 - **Medals for 18, 19 and 20 out of 20**, and a downloadable **certificate of honour** to share on LinkedIn.
 - **Bugle calls and sound effects.** A real *Attention* call opens every game, *Charge* greets a medal, and a bugle flourish rewards every streak of three. One tap mutes it all.
 - **Share anywhere**: WhatsApp, Viber, Messenger, Telegram, Facebook, LinkedIn, X or email, or the phone’s own share sheet, which attaches your certificate.
@@ -50,7 +54,7 @@ Every medal comes with a certificate rendered in the browser, in the language yo
 
 <img src="docs/screenshots/certificate.jpg" alt="Certificate of honour with a gold medal for 20 out of 20" width="640">
 
-Points add up along the way: 100 for a correct answer, plus up to 50 for a streak of correct answers. A correct answer after the 50:50 is worth 50.
+Points add up along the way: 100 for a correct answer, plus up to 50 for a streak of correct answers. A correct answer with help is worth 50. A Second chance that you turned on but didn’t need costs nothing.
 
 ## Run it locally
 
@@ -75,15 +79,15 @@ src/
 │   ├── chapters/        # the 100 questions, one file per chapter (English + Greek)
 │   └── images.ts        # every photo and map: file, author, licence, captions
 ├── game/
-│   ├── engine.ts        # rounds, 50:50, scoring and medals (pure, unit-tested)
-│   ├── geo.ts           # map projection and distances
+│   ├── engine.ts        # rounds, helps, scoring and medals (pure, unit-tested)
+│   ├── geo.ts           # map projection, distances and compass directions
 │   ├── certificate.ts   # draws the certificate on a canvas
 │   ├── sound.ts         # bugle calls and synthesised sound effects
 │   └── share.ts         # share links for each app
 ├── components/          # Home, Quiz, MapPicker, Results, ShareMenu, About …
 └── i18n/strings.ts      # interface text in both languages
 public/img/              # images from Wikimedia Commons, resized to WebP
-public/sounds/           # two public-domain bugle calls
+public/sounds/           # the 1940 radio communiqué and two bugle calls, all public domain
 test/                    # data integrity and game-rule tests
 ```
 
@@ -109,7 +113,7 @@ The questions are based on well-documented facts about the period. Where a story
 
 All photos and maps come from [Wikimedia Commons](https://commons.wikimedia.org/) and are in the public domain or under free licences (CC0, CC BY, CC BY-SA). They were resized and converted to WebP for the web. The author, licence and source page of each image are listed in [`src/data/images.ts`](src/data/images.ts) and on the **About & credits** page of the game. The base map is Wikipedia’s *Greece relief location map* by Lencer and Uwe Dedering (CC BY-SA 3.0).
 
-The two bugle calls are public-domain recordings of the US armed forces from Wikimedia Commons: [*Attention*](https://commons.wikimedia.org/wiki/File:Attention_(United_States_Marine_Band_version).ogg) by the United States Marine Band and [*Charge*](https://commons.wikimedia.org/wiki/File:Charge_-_Concert_Band_-_United_States_Air_Force_Heritage_of_America_Band.mp3) by the United States Air Force Heritage of America Band, trimmed and converted to WAV. All other sounds are synthesised in the browser. Share buttons use brand icons from [Simple Icons](https://simpleicons.org/) (CC0).
+The welcome screen plays the archive radio recording of the first communiqué of the General Headquarters on 28 October 1940 (public domain), taken from [a copy on YouTube](https://www.youtube.com/watch?v=RnAPb6-UEFY). The two bugle calls are public-domain recordings of the US armed forces from Wikimedia Commons: [*Attention*](https://commons.wikimedia.org/wiki/File:Attention_(United_States_Marine_Band_version).ogg) by the United States Marine Band and [*Charge*](https://commons.wikimedia.org/wiki/File:Charge_-_Concert_Band_-_United_States_Air_Force_Heritage_of_America_Band.mp3) by the United States Air Force Heritage of America Band, trimmed and converted to WAV. All other sounds are synthesised in the browser. Share buttons use brand icons from [Simple Icons](https://simpleicons.org/) (CC0).
 
 ## Ελληνικά
 

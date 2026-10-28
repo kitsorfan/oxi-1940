@@ -30,8 +30,8 @@ export function About({ onBack }: { onBack: () => void }) {
                 <span className="credit__caption">{pick(sound.title)}</span>
                 <span className="credit__meta">
                   {sound.author} · {sound.license} ·{' '}
-                  <a href={commonsUrl(sound.file)} target="_blank" rel="noreferrer">
-                    Wikimedia Commons
+                  <a href={sound.source.url} target="_blank" rel="noreferrer">
+                    {sound.source.label}
                   </a>
                 </span>
               </span>

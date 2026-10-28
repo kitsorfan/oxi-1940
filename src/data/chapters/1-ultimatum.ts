@@ -20,6 +20,10 @@ export const ultimatum: Chapter = {
       place: t('Corfu', 'Κέρκυρα'),
       lat: 39.62,
       lon: 19.86,
+      hint: t(
+        'Look at the northern end of the Ionian Sea, just off the coast of Epirus.',
+        'Ψάξε στο βόρειο άκρο του Ιονίου, απέναντι από τις ακτές της Ηπείρου.',
+      ),
       fact: t(
         'The “Corfu incident” of 1923 revealed Mussolini’s ambitions in the Ionian and the Adriatic, seventeen years before the war.',
         'Το «επεισόδιο της Κέρκυρας» το 1923 φανέρωσε τις βλέψεις του Μουσολίνι στο Ιόνιο και την Αδριατική, δεκαεπτά χρόνια πριν από τον πόλεμο.',
@@ -33,6 +37,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('Albania', 'Την Αλβανία'),
       wrong: [t('Yugoslavia', 'Τη Γιουγκοσλαβία'), t('Bulgaria', 'Τη Βουλγαρία'), t('Turkey', 'Την Τουρκία')],
+      hint: t(
+        'Think of the small kingdom just across the Strait of Otranto from the heel of Italy.',
+        'Σκέψου το μικρό βασίλειο που βρίσκεται απέναντι από την Απουλία, στην άλλη όχθη των Στενών του Οτράντο.',
+      ),
       fact: t(
         'Italian troops landed in Albania on 7 April 1939. A year and a half later it became the springboard for the attack on Greece.',
         'Τα ιταλικά στρατεύματα αποβιβάστηκαν στην Αλβανία στις 7 Απριλίου 1939. Ενάμιση χρόνο αργότερα έγινε το ορμητήριο της επίθεσης κατά της Ελλάδας.',
@@ -47,6 +55,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('An army officer and general', 'Αξιωματικός του στρατού και στρατηγός'),
       wrong: [t('A banker', 'Τραπεζίτης'), t('A poet', 'Ποιητής'), t('A shipowner', 'Εφοπλιστής')],
+      hint: t(
+        'He studied in Berlin as a young man and helped plan operations in the Balkan Wars.',
+        'Σπούδασε νέος στο Βερολίνο και στους Βαλκανικούς Πολέμους συμμετείχε στον σχεδιασμό των επιχειρήσεων.',
+      ),
       fact: t(
         'Metaxas, a former general and staff officer, had governed Greece since 1936 and had fortified the northern borders, expecting war.',
         'Ο Μεταξάς, πρώην στρατηγός και επιτελικός αξιωματικός, κυβερνούσε την Ελλάδα από το 1936 και είχε οχυρώσει τα βόρεια σύνορα προβλέποντας τον πόλεμο.',
@@ -61,6 +73,10 @@ export const ultimatum: Chapter = {
         t('The Regime of the Colonels', 'Η Δικτατορία των Συνταγματαρχών'),
         t('The National Schism', 'Ο Εθνικός Διχασμός'),
       ],
+      hint: t(
+        'It began in the summer of 1936 under a restored king, so it was neither a republic nor the 1960s junta.',
+        'Ξεκίνησε το καλοκαίρι του 1936, με τον βασιλιά ξανά στον θρόνο· άρα δεν ήταν δημοκρατία ούτε η χούντα του ’67.',
+      ),
       fact: t(
         'It was named after 4 August 1936, when Metaxas, with the King’s consent, suspended parliament and ruled as a dictator.',
         'Πήρε το όνομά του από την 4η Αυγούστου 1936, όταν ο Μεταξάς, με τη συναίνεση του βασιλιά, ανέστειλε τη λειτουργία της Βουλής και κυβέρνησε δικτατορικά.',
@@ -72,6 +88,10 @@ export const ultimatum: Chapter = {
       prompt: t('Who was King of Greece in 1940?', 'Ποιος ήταν βασιλιάς της Ελλάδας το 1940;'),
       answer: t('George II', 'Ο Γεώργιος Β΄'),
       wrong: [t('Constantine I', 'Ο Κωνσταντίνος Α΄'), t('Paul', 'Ο Παύλος'), t('Otto', 'Ο Όθων')],
+      hint: t(
+        'He was the eldest son of the king who had died in exile in 1923.',
+        'Ήταν ο πρωτότοκος γιος του βασιλιά που είχε πεθάνει εξόριστος το 1923.',
+      ),
       fact: t(
         'George II had returned to the throne in 1935, after almost twelve years in exile.',
         'Ο Γεώργιος Β΄ είχε επιστρέψει στον θρόνο το 1935, ύστερα από σχεδόν δώδεκα χρόνια εξορίας.',
@@ -86,6 +106,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('The Dormition of the Virgin Mary', 'Την Κοίμηση της Θεοτόκου'),
       wrong: [t('Easter Sunday', 'Το Πάσχα'), t('The feast of St Nicholas', 'Τη γιορτή του Αγίου Νικολάου'), t('Independence Day', 'Την 25η Μαρτίου')],
+      hint: t(
+        'Spring and winter dates are out: think of the great Orthodox feast at the height of summer.',
+        'Ό,τι γιορτάζεται την άνοιξη ή τον χειμώνα αποκλείεται· σκέψου τη μεγάλη γιορτή της Ορθοδοξίας στην καρδιά του καλοκαιριού.',
+      ),
       fact: t(
         'Elli was in Tinos for the great feast of the Virgin. The Italian submarine Delfino torpedoed her in peacetime, while pilgrims watched from the shore.',
         'Η «Έλλη» βρισκόταν στην Τήνο για τη μεγάλη γιορτή της Παναγίας. Την τορπίλισε εν καιρώ ειρήνης το ιταλικό υποβρύχιο «Ντελφίνο», μπροστά στα μάτια των προσκυνητών.',
@@ -100,6 +124,10 @@ export const ultimatum: Chapter = {
         t('Allies in the Axis', 'Ήταν σύμμαχοι στον Άξονα'),
         t('Fighting over Cyprus', 'Συγκρούονταν για την Κύπρο'),
       ],
+      hint: t(
+        'The ultimatum that opened the Greco-Italian War was still more than two months away.',
+        'Το τελεσίγραφο που άνοιξε τον ελληνοϊταλικό πόλεμο απείχε ακόμη πάνω από δύο μήνες.',
+      ),
       fact: t(
         'To avoid giving Italy a pretext, the government spoke only of an “unknown submarine”. The torpedo fragments recovered were Italian.',
         'Για να μη δώσει αφορμή, η κυβέρνηση μίλησε μόνο για «άγνωστο υποβρύχιο». Τα θραύσματα της τορπίλης που βρέθηκαν ήταν ιταλικά.',
@@ -112,6 +140,10 @@ export const ultimatum: Chapter = {
       lat: 37.6,
       lon: 25.15,
       radiusKm: 30,
+      hint: t(
+        'Look in the northern Cyclades, on the island chain that runs from Andros down to Mykonos.',
+        'Ψάξε στις βόρειες Κυκλάδες, στη σειρά νησιών που ξεκινά από την Άνδρο και φτάνει ως τη Μύκονο.',
+      ),
       fact: t(
         'Tinos, in the Cyclades, is home to the church of Panagia Evangelistria, where thousands of pilgrims gather every 15 August.',
         'Η Τήνος, στις Κυκλάδες, φιλοξενεί τον ναό της Παναγίας της Ευαγγελίστριας, όπου κάθε Δεκαπενταύγουστο συρρέουν χιλιάδες προσκυνητές.',
@@ -133,6 +165,10 @@ export const ultimatum: Chapter = {
         t('Because Hitler ordered him to', 'Επειδή τον διέταξε ο Χίτλερ'),
         t('To stop a Greek landing on Rhodes', 'Για να αποτρέψει ελληνική απόβαση στη Ρόδο'),
       ],
+      hint: t(
+        'Think of the rivalry between the two Axis dictators, not of any Greek provocation.',
+        'Σκέψου τον ανταγωνισμό ανάμεσα στους δύο δικτάτορες του Άξονα, όχι κάποια ελληνική πρόκληση.',
+      ),
       fact: t(
         'Annoyed that Hitler kept acting without telling him, Mussolini said: “He will find out from the papers that I have occupied Greece.”',
         'Θιγμένος που ο Χίτλερ ενεργούσε χωρίς να τον ενημερώνει, ο Μουσολίνι είπε: «Θα μάθει από τις εφημερίδες ότι κατέλαβα την Ελλάδα».',
@@ -147,6 +183,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('He was his son-in-law', 'Ήταν γαμπρός του'),
       wrong: [t('He was his brother', 'Ήταν αδελφός του'), t('He was his nephew', 'Ήταν ανιψιός του'), t('He was his cousin', 'Ήταν ξάδελφός του')],
+      hint: t(
+        'Ciano was twenty years younger than Mussolini, and the family tie ran through the Duce’s children.',
+        'Ο Τσιάνο ήταν είκοσι χρόνια νεότερος από τον Μουσολίνι, και η συγγένειά τους περνούσε από τα παιδιά του Ντούτσε.',
+      ),
       fact: t(
         'Ciano had married Mussolini’s daughter Edda. His diary, where he recorded Mussolini’s plans, is a key source on the attack on Greece.',
         'Ο Τσιάνο είχε παντρευτεί την κόρη του Μουσολίνι, Έντα. Το ημερολόγιό του, όπου κατέγραφε τα σχέδια του Μουσολίνι, είναι βασική πηγή για την επίθεση στην Ελλάδα.',
@@ -164,6 +204,10 @@ export const ultimatum: Chapter = {
         t('At 9:00 p.m. on 27 October', 'Στις 9:00 το βράδυ της 27ης Οκτωβρίου'),
         t('At 6:00 p.m. on 28 October', 'Στις 6:00 το απόγευμα της 28ης Οκτωβρίου'),
       ],
+      hint: t(
+        'The knock on Metaxas’ door came while Athens was still fast asleep.',
+        'Χτύπησαν την πόρτα του Μεταξά την ώρα που η Αθήνα κοιμόταν βαθιά.',
+      ),
       fact: t(
         'Metaxas was woken in the middle of the night at his home. Greece was given only until 6:00 a.m. to reply.',
         'Ο Μεταξάς ξύπνησε μέσα στη νύχτα στο σπίτι του. Η Ελλάδα είχε προθεσμία μόλις ως τις 6:00 το πρωί για να απαντήσει.',
@@ -178,6 +222,10 @@ export const ultimatum: Chapter = {
         t('Benito Mussolini in person', 'Ο ίδιος ο Μπενίτο Μουσολίνι'),
         t('An Italian general from Albania', 'Ένας Ιταλός στρατηγός από την Αλβανία'),
       ],
+      hint: t(
+        'Neither Mussolini nor his foreign minister was in Athens: the messenger already lived in the city.',
+        'Ούτε ο Μουσολίνι ούτε ο υπουργός Εξωτερικών του βρίσκονταν στην Αθήνα· ο αγγελιοφόρος ζούσε ήδη στην πόλη.',
+      ),
       fact: t(
         'Grazzi later described that night in his memoir, titled “The Beginning of the End” (Il principio della fine).',
         'Ο Γκράτσι περιέγραψε αργότερα εκείνη τη νύχτα στα απομνημονεύματά του, με τίτλο «Η αρχή του τέλους» (Il principio della fine).',
@@ -192,6 +240,10 @@ export const ultimatum: Chapter = {
       place: t('Athens (Kifissia)', 'Αθήνα (Κηφισιά)'),
       lat: 38.03,
       lon: 23.77,
+      hint: t(
+        'Look in Attica, by the Saronic Gulf, then head a little north towards Mount Penteli.',
+        'Ψάξε στην Αττική, πάνω από τον Σαρωνικό, και ανέβα λίγο βόρεια, προς την Πεντέλη.',
+      ),
       fact: t(
         'Within hours, sirens sounded across Athens and crowds filled the streets, cheering the decision to resist.',
         'Μέσα σε λίγες ώρες οι σειρήνες ήχησαν σε όλη την Αθήνα και πλήθη γέμισαν τους δρόμους, επευφημώντας την απόφαση για αντίσταση.',
@@ -209,6 +261,10 @@ export const ultimatum: Chapter = {
         t('That Greece declare war on Britain', 'Να κηρύξει η Ελλάδα πόλεμο στη Βρετανία'),
         t('That Greece give Corfu to Italy', 'Να παραχωρήσει η Ελλάδα την Κέρκυρα στην Ιταλία'),
       ],
+      hint: t(
+        'It concerned Italy’s soldiers, not Greece’s ships, and it was vague by design.',
+        'Αφορούσε τους Ιταλούς στρατιώτες, όχι τα ελληνικά πλοία, και ήταν σκόπιμα αόριστο.',
+      ),
       fact: t(
         'The “strategic points” were not even named. Italy accused Greece of helping Britain, but Metaxas saw at once that it was a pretext for war.',
         'Τα «στρατηγικά σημεία» δεν κατονομάζονταν καν. Η Ιταλία κατηγορούσε την Ελλάδα ότι βοηθούσε τη Βρετανία, όμως ο Μεταξάς κατάλαβε αμέσως ότι ήταν πρόσχημα πολέμου.',
@@ -222,6 +278,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('French', 'Στα γαλλικά'),
       wrong: [t('Italian', 'Στα ιταλικά'), t('English', 'Στα αγγλικά'), t('German', 'Στα γερμανικά')],
+      hint: t(
+        'Neither man spoke his mother tongue: they used the language diplomats shared in that era.',
+        'Κανείς από τους δύο δεν μίλησε τη μητρική του γλώσσα· χρησιμοποίησαν την κοινή γλώσσα των διπλωματών της εποχής.',
+      ),
       fact: t(
         'French was the language of diplomacy at the time, so Grazzi and Metaxas spoke French together.',
         'Τα γαλλικά ήταν τότε η γλώσσα της διπλωματίας, γι’ αυτό ο Γκράτσι και ο Μεταξάς μιλούσαν μεταξύ τους γαλλικά.',
@@ -236,6 +296,10 @@ export const ultimatum: Chapter = {
         t('At noon on 28 October', 'Το μεσημέρι της 28ης Οκτωβρίου'),
         t('A week later, on 4 November', 'Μία εβδομάδα αργότερα, στις 4 Νοεμβρίου'),
       ],
+      hint: t(
+        'Early that same morning, in the rain: ask yourself whether Italy even kept to its own deadline.',
+        'Το ίδιο κιόλας πρωί, μέσα στη βροχή· αναρωτήσου αν η Ιταλία τήρησε έστω τη δική της προθεσμία.',
+      ),
       fact: t(
         'The attack began at dawn in pouring rain. Soon the mud would bog down Italian tanks and trucks.',
         'Η επίθεση ξεκίνησε τα ξημερώματα με καταρρακτώδη βροχή. Σύντομα η λάσπη θα ακινητοποιούσε τα ιταλικά άρματα και φορτηγά.',
@@ -249,6 +313,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('honour', 'τιμήν'),
       wrong: [t('glory', 'δόξαν'), t('freedom', 'ελευθερίαν'), t('islands', 'νήσους')],
+      hint: t(
+        'Freedom and territory are already covered: the last word is about the nation’s dignity.',
+        'Η ελευθερία και τα εδάφη καλύπτονται ήδη· η τελευταία λέξη αφορά την αξιοπρέπεια του έθνους.',
+      ),
       fact: t(
         'The proclamation was broadcast on the radio on the morning of 28 October and printed in every newspaper.',
         'Το διάγγελμα μεταδόθηκε από το ραδιόφωνο το πρωί της 28ης Οκτωβρίου και δημοσιεύτηκε σε όλες τις εφημερίδες.',
@@ -263,6 +331,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('«ΟΧΙ» (“No”)', '«ΟΧΙ»'),
       wrong: [t('«ΝΑΙ» (“Yes”)', '«ΝΑΙ»'), t('«ΝΙΚΗ» (“Victory”)', '«ΝΙΚΗ»'), t('«ΕΜΠΡΟΣ» (“Forward”)', '«ΕΜΠΡΟΣ»')],
+      hint: t(
+        'It wasn’t a war cry but the plainest possible answer to a demand.',
+        'Δεν ήταν πολεμική ιαχή, αλλά η πιο απλή απάντηση που μπορεί να πάρει μια απαίτηση.',
+      ),
       fact: t(
         'Newspapers and people summed up the government’s answer in that one word. Here: the front page of Ellinikon Mellon, 30 October 1940.',
         'Εφημερίδες και λαός συνόψισαν την απάντηση της κυβέρνησης σε αυτή τη μία λέξη. Εδώ, το πρωτοσέλιδο του «Ελληνικόν Μέλλον», 30 Οκτωβρίου 1940.',
@@ -278,6 +350,10 @@ export const ultimatum: Chapter = {
         t('With a minute’s silence only', 'Μόνο με ενός λεπτού σιγή'),
         t('With a national football match', 'Με έναν εθνικό ποδοσφαιρικό αγώνα'),
       ],
+      hint: t(
+        'Schools and offices close, yet many pupils are up early that morning, dressed in blue and white.',
+        'Σχολεία και γραφεία κλείνουν, κι όμως πολλοί μαθητές ξυπνούν νωρίς εκείνο το πρωί, ντυμένοι στα μπλε και στα άσπρα.',
+      ),
       fact: t(
         'Balconies are decorated with flags, and the main military parade is held in Thessaloniki, which also celebrates its patron saint, St Demetrius, on 26 October.',
         'Τα μπαλκόνια στολίζονται με σημαίες και η μεγάλη στρατιωτική παρέλαση γίνεται στη Θεσσαλονίκη, που στις 26 Οκτωβρίου γιορτάζει και τον πολιούχο της, τον Άγιο Δημήτριο.',
@@ -291,6 +367,10 @@ export const ultimatum: Chapter = {
       ),
       answer: t('The Holy Protection (Agia Skepi)', 'Την Αγία Σκέπη'),
       wrong: [t('The Annunciation', 'Τον Ευαγγελισμό'), t('The Dormition', 'Την Κοίμηση της Θεοτόκου'), t('The Presentation in the Temple', 'Τα Εισόδια της Θεοτόκου')],
+      hint: t(
+        'The feast recalls a vision in Constantinople: the Virgin spreading her veil over the faithful.',
+        'Η γιορτή ανάγεται σε ένα όραμα στην Κωνσταντινούπολη, όπου η Παναγία άπλωσε το μαφόριό της πάνω από τους πιστούς.',
+      ),
       fact: t(
         'Many soldiers of 1940 spoke of the Virgin’s protection at the front, so the Church moved the feast of her Holy Protection to 28 October.',
         'Πολλοί στρατιώτες του ’40 μιλούσαν για την προστασία της Παναγίας στο μέτωπο. Γι’ αυτό η Εκκλησία μετέφερε τη γιορτή της Αγίας Σκέπης στις 28 Οκτωβρίου.',

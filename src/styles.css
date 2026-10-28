@@ -251,6 +251,12 @@ h3 {
   box-shadow: 0 4px 0 #9d7a0f;
 }
 
+.btn--gold:hover:not(:disabled) {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 #9d7a0f, 0 10px 20px rgba(217, 169, 26, 0.3);
+}
+
 .btn--ghost {
   background: transparent;
   border-color: var(--line);
@@ -314,7 +320,7 @@ h3 {
   overflow: hidden;
   color: #fff;
   background:
-    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0 22px, transparent 22px 44px),
+    repeating-linear-gradient(180deg, transparent 0 11.11%, rgba(255, 255, 255, 0.035) 11.11% 22.22%),
     radial-gradient(120% 90% at 85% 0%, #1d4f8f 0%, transparent 60%),
     linear-gradient(160deg, var(--navy) 0%, #0a1d36 100%);
 }
@@ -377,39 +383,93 @@ h3 {
   font-size: 16px;
 }
 
-.rules {
+.facts {
   list-style: none;
   padding: 0;
-  margin: 22px 0 0;
+  margin: 24px 0 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 16px 20px;
   max-width: 640px;
 }
 
-.rules li {
+.facts li {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(243, 211, 107, 0.6);
   font-family: var(--head);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.2;
 }
 
-.rules svg {
-  flex: none;
+.facts strong {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
   color: var(--gold-2);
+  letter-spacing: 0.02em;
+}
+
+.facts span {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* The print stack only has room beside the text on wide screens. */
+.hero__art {
+  display: none;
+}
+
+.print {
+  position: absolute;
+  height: auto;
+  padding: 8px;
+  background: #fffdf8;
+  border-radius: 3px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    0 22px 44px rgba(0, 0, 0, 0.4);
+  animation: deal 0.7s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+/* Laid out so that no print hides the faces or the headline of another. */
+.print--newspaper {
+  top: 4%;
+  left: 0;
+  width: 66%;
+  rotate: -5deg;
+}
+
+.print--soldier-mother {
+  top: 20%;
+  right: 0;
+  width: 46%;
+  rotate: 6deg;
+  animation-delay: 0.12s;
+}
+
+.print--italian-winter {
+  bottom: 4%;
+  left: 6%;
+  width: 60%;
+  rotate: -3deg;
+  animation-delay: 0.24s;
+}
+
+.hero__medal {
+  position: absolute;
+  right: 9%;
+  bottom: 5%;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
+  animation: drop 0.6s 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) both;
 }
 
 .hero__cta {
-  margin-top: 24px;
+  margin-top: 28px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -418,13 +478,14 @@ h3 {
 }
 
 .btn--outline-light {
-  background: rgba(255, 255, 255, 0.06);
+  background: #172c4b;
   border-color: rgba(255, 255, 255, 0.45);
   color: #fff;
 }
 
 .btn--outline-light:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: #22406a;
+  border-color: rgba(255, 255, 255, 0.75);
 }
 
 /* ---------- Share sheet ---------- */
@@ -1062,30 +1123,48 @@ h3 {
   filter: grayscale(1);
 }
 
-/* Lifeline */
+.option__poll {
+  flex: none;
+  min-width: 56px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: linear-gradient(to right, rgba(217, 169, 26, 0.5) var(--share), rgba(217, 169, 26, 0.12) var(--share));
+  color: #7a5a00;
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 15px;
+  text-align: right;
+  animation: fade 0.3s ease both;
+}
+
+/* Helps */
 .lifeline {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
   margin-top: 16px;
 }
 
+.lifeline__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .lifeline__btn {
-  flex: none;
+  flex: 1 1 auto;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  height: 44px;
-  padding: 0 16px;
+  justify-content: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 12px;
   border-radius: 999px;
   border: 2px dashed var(--gold);
   background: #fff8e1;
   color: #7a5a00;
   font-family: var(--head);
   font-weight: 800;
-  font-size: 17px;
+  font-size: 15px;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .lifeline__btn:hover:not(:disabled) {
@@ -1100,11 +1179,77 @@ h3 {
   cursor: not-allowed;
 }
 
+/* Armed and waiting for a wrong answer to catch. */
+.lifeline__btn--on,
+.lifeline__btn--on:disabled {
+  border: 2px solid var(--gold);
+  background: var(--gold);
+  color: var(--navy);
+  cursor: default;
+}
+
 .lifeline__hint {
-  flex: 1 1 180px;
+  /* Room for two lines, so the buttons don't jump as the text changes on hover. */
+  min-height: 2.7em;
+  margin: 8px 0 0;
   font-size: 13px;
   color: var(--muted);
   line-height: 1.35;
+}
+
+.retry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+  background: #fff8e1;
+  color: #7a5a00;
+  font-weight: 600;
+  line-height: 1.35;
+  animation: rise 0.3s ease both;
+}
+
+.retry svg {
+  flex: none;
+}
+
+/* The clue from the Telegram help. */
+.telegram {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #e0cf96;
+  background: #fbf3d5;
+  box-shadow: 0 1px 0 rgba(11, 37, 69, 0.06), 0 6px 14px rgba(11, 37, 69, 0.08);
+  animation: rise 0.3s ease both;
+}
+
+.telegram__from {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a5a00;
+}
+
+.telegram__text {
+  margin: 0;
+  font-family: 'Courier New', Courier, ui-monospace, monospace;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.telegram__stop {
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
 /* Map */
@@ -1168,6 +1313,28 @@ h3 {
 
 .map__pin--target path {
   fill: var(--good);
+}
+
+/* The miss the Second chance caught, left on the map for reference. */
+.map__pin--first {
+  opacity: 0.5;
+}
+
+.map__pin--first path {
+  fill: var(--bad);
+}
+
+.map__crowd {
+  fill: var(--gold);
+  stroke: var(--navy);
+  animation: fade 0.3s ease both;
+  animation-delay: calc(var(--i) * 30ms);
+}
+
+.map-legend {
+  margin: -4px 0 12px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .map__label {
@@ -1629,6 +1796,12 @@ h3 {
   }
 }
 
+@keyframes hum {
+  50% {
+    transform: rotate(-1.5deg) scale(1.02);
+  }
+}
+
 @keyframes pulse {
   50% {
     opacity: 0.45;
@@ -1662,6 +1835,13 @@ h3 {
   }
 }
 
+@keyframes deal {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+}
+
 @keyframes confetti {
   to {
     transform: translate(var(--drift), 110vh) rotate(var(--spin));
@@ -1682,10 +1862,334 @@ h3 {
   }
 }
 
+/* ---------- Welcome splash ---------- */
+/* Below the top bar (z-index 30), so the language and sound buttons stay usable. */
+.welcome {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: calc(var(--topbar) + env(safe-area-inset-top) + 28px) var(--gutter) calc(28px + env(safe-area-inset-bottom));
+  color: #fff;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 11.11%, rgba(255, 255, 255, 0.035) 11.11% 22.22%),
+    radial-gradient(120% 90% at 85% 0%, #1d4f8f 0%, transparent 60%),
+    linear-gradient(160deg, var(--navy) 0%, #0a1d36 100%);
+  animation: fade 0.25s ease both;
+}
+
+/* Auto margins centre the panel without clipping its top when it is taller than the screen. */
+.welcome__panel {
+  width: 100%;
+  max-width: 560px;
+  margin: auto;
+}
+
+.welcome__title {
+  margin-top: 6px;
+  font-size: clamp(44px, 12vw, 68px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.welcome__text {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.welcome__list {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.welcome__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  /* Solid, so the stripes behind do not show through. */
+  background: #172c4b;
+  border: 1px solid #2a4266;
+  animation: rise 0.45s ease both;
+  animation-delay: calc(var(--i) * 80ms + 150ms);
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+/* Only where there is a real pointer, so a tap on a phone does not leave a card raised. */
+@media (hover: hover) {
+  .welcome__item:hover {
+    background: #1d3659;
+    border-color: rgba(243, 211, 107, 0.55);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+  }
+}
+
+.welcome__item strong {
+  display: block;
+  font-family: var(--head);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.welcome__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(243, 211, 107, 0.14);
+  border: 1px solid rgba(243, 211, 107, 0.3);
+  color: var(--gold-2);
+}
+
+.welcome__desc {
+  display: block;
+  margin-top: 3px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.welcome__start {
+  margin-top: 24px;
+}
+
+.welcome__credit {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.welcome__credit a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.welcome__credit a:hover {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
+}
+
+/* ---------- Radio Athens, 1940 ---------- */
+.radio {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #1b2c44;
+  border: 1px solid rgba(243, 211, 107, 0.35);
+  animation: rise 0.45s ease both 0.5s;
+}
+
+.radio__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.radio__heading {
+  font-family: var(--head);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--gold-2);
+}
+
+/* The line being read lights up; the others dim while the set is on. */
+.radio--playing .radio__text p {
+  opacity: 0.45;
+  transition: opacity 0.4s ease;
+}
+
+.radio--playing .radio__text p.radio__line--on {
+  opacity: 1;
+}
+
+.radio__set {
+  position: relative;
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  transition: transform 0.15s ease;
+}
+
+.radio__set:hover {
+  transform: scale(1.05);
+}
+
+.radio__case {
+  fill: #6b4423;
+  stroke: #3d2412;
+  stroke-width: 2;
+}
+
+.radio__antenna {
+  stroke: #c9b48a;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.radio__grille {
+  fill: #e9d9b4;
+  stroke: #3d2412;
+  stroke-width: 1.5;
+}
+
+.radio__slot {
+  stroke: #8a6a3f;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.radio__dial {
+  fill: #f3d36b;
+  stroke: #3d2412;
+  stroke-width: 1.2;
+}
+
+.radio__knob {
+  fill: #2a1a0d;
+  stroke: #c9b48a;
+  stroke-width: 1.2;
+}
+
+.radio--playing .radio__dial {
+  fill: #ffe9a3;
+  filter: drop-shadow(0 0 3px #f3d36b);
+}
+
+.radio--playing .radio__set {
+  animation: hum 0.9s ease-in-out infinite;
+}
+
+.radio__play {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.radio__play svg {
+  fill: var(--navy);
+}
+
+.radio__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.radio__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.radio__onair {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #b3261e;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.radio__onair::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #fff;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.radio__cta {
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold-2);
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.radio__cta:hover {
+  color: #fff;
+}
+
+.radio__text {
+  margin: 8px 0 0;
+  padding: 0 0 0 12px;
+  border-left: 3px solid var(--gold);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #f4ecd8;
+}
+
+.radio__text p {
+  margin: 0 0 6px;
+  animation: fade 0.5s ease both;
+}
+
+.radio__en {
+  display: block;
+  font-style: normal;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.radio__note {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /* ---------- Larger screens ---------- */
 @media (min-width: 640px) {
   :root {
     --gutter: 24px;
+  }
+
+  .welcome__text {
+    font-size: 18px;
   }
 
   .hero__inner {
@@ -1696,15 +2200,15 @@ h3 {
     font-size: 18px;
   }
 
-  .rules {
-    grid-template-columns: repeat(4, 1fr);
+  .facts {
+    grid-template-columns: repeat(4, minmax(0, max-content));
+    gap: 20px 28px;
     max-width: none;
   }
 
   .hero__cta {
-    flex-direction: row-reverse;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-end;
   }
 
   .hero__cta .btn {
@@ -1767,11 +2271,22 @@ h3 {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+    gap: 56px;
+    align-items: center;
+  }
+
+  /* The prints take the cross's place; at the screen edge it drifted away from the content. */
   .hero::after {
-    right: 40px;
-    top: 40px;
-    width: 360px;
-    height: 360px;
+    display: none;
+  }
+
+  .hero__art {
+    display: block;
+    position: relative;
+    aspect-ratio: 1;
   }
 
   .cabinet__slots {

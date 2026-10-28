@@ -1,8 +1,10 @@
 import type { Chapter, ChoiceQuestion, L, MapQuestion } from '../types';
-import { VIEW, type Point } from './geo';
+import { VIEW, offsetKm, project, type Point } from './geo';
 
 export type Rng = () => number;
 export type Medal = 'gold' | 'silver' | 'bronze';
+/** The helps a player can use, each once per game. */
+export type Help = 'fifty' | 'poll' | 'second' | 'telegram';
 
 export const ROUND_SIZE = 20;
 export const MIXED_ID = 'mixed';
@@ -77,6 +79,60 @@ export function mapSplit(target: Point): MapSplit {
   return { axis, at, keep: target[axis] < at ? 'before' : 'after' };
 }
 
+/**
+ * How the company votes on a choice question, in whole percent per option.
+ * The answer usually leads, not always clearly, and now and then the crowd is wrong.
+ * Options the 50:50 removed get no votes.
+ */
+export function companyPoll(item: ChoiceItem, removed: number[] = [], rng: Rng = Math.random): number[] {
+  const weights = item.options.map((_, i) => {
+    if (removed.includes(i)) return 0;
+    return i === item.correct ? 25 + rng() * 40 : 5 + rng() * 35;
+  });
+  const total = weights.reduce((a, b) => a + b, 0);
+  const exact = weights.map((w) => (w / total) * 100);
+  const shares = exact.map(Math.floor);
+  // Hand the points lost to rounding down to the largest remainders, so the shares add up to 100.
+  const missing = 100 - shares.reduce((a, b) => a + b, 0);
+  const byRemainder = exact.map((e, i) => ({ i, rest: e - Math.floor(e) })).sort((a, b) => b.rest - a.rest);
+  for (const { i } of byRemainder.slice(0, missing)) shares[i]! += 1;
+  return shares;
+}
+
+const CROWD_SIZE = 20;
+const CROWD_STRAYS = 3;
+
+/** A standard normal sample (Box–Muller). */
+function gaussian(rng: Rng): number {
+  return Math.sqrt(-2 * Math.log(1 - rng())) * Math.cos(2 * Math.PI * rng());
+}
+
+/**
+ * Where the company would drop their pins on a map question: a cloud around a spot
+ * a little off the target, plus a few soldiers far astray. All inside the visible map.
+ */
+export function companyGuesses(target: { lat: number; lon: number }, rng: Rng = Math.random): Point[] {
+  const angle = rng() * 2 * Math.PI;
+  const offKm = 10 + rng() * 35;
+  const centre = offsetKm(target, offKm * Math.sin(angle), offKm * Math.cos(angle));
+  return Array.from({ length: CROWD_SIZE }, (_, i) => {
+    const spreadKm = i < CROWD_STRAYS ? 140 : 45;
+    // A pin that lands off the map is drawn again; pinning it to the edge would line the edge with dots.
+    let p: Point;
+    let tries = 0;
+    do {
+      const { lat, lon } = offsetKm(centre, gaussian(rng) * spreadKm, gaussian(rng) * spreadKm);
+      p = project(lat, lon);
+    } while (!onMap(p) && ++tries < 50);
+    return {
+      x: Math.min(Math.max(p.x, VIEW.x + 8), VIEW.x + VIEW.width - 8),
+      y: Math.min(Math.max(p.y, VIEW.y + 8), VIEW.y + VIEW.height - 8),
+    };
+  });
+}
+
+const onMap = (p: Point) => p.x > VIEW.x && p.x < VIEW.x + VIEW.width && p.y > VIEW.y && p.y < VIEW.y + VIEW.height;
+
 export function medalFor(correct: number, total: number = ROUND_SIZE): Medal | null {
   const missed = total - correct;
   if (missed <= 0) return 'gold';
@@ -87,9 +143,12 @@ export function medalFor(correct: number, total: number = ROUND_SIZE): Medal | n
 
 export const MEDAL_RANK: Record<Medal, number> = { bronze: 1, silver: 2, gold: 3 };
 
-/** `streak` counts the current answer, so the first correct answer has streak 1. */
-export function pointsFor(correct: boolean, streak: number, usedFifty: boolean): number {
+/**
+ * `streak` counts the current answer, so the first correct answer has streak 1.
+ * `helped` is whether a help was used on this question; it halves the base.
+ */
+export function pointsFor(correct: boolean, streak: number, helped: boolean): number {
   if (!correct) return 0;
-  const base = usedFifty ? 50 : 100;
+  const base = helped ? 50 : 100;
   return base + 10 * Math.min(Math.max(streak - 1, 0), 5);
 }

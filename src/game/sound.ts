@@ -175,7 +175,14 @@ export const sfx = {
     const ac = audio();
     if (ac) tone(ac, 520, ac.currentTime, 0.09, { volume: 0.22, slideTo: 880 });
   },
-  fifty() {
+  /** A softer buzz when the Second chance catches a wrong answer. */
+  miss() {
+    const ac = audio();
+    if (ac) tone(ac, 247, ac.currentTime, 0.22, { type: 'square', volume: 0.06, slideTo: 196 });
+    vibrate(30);
+  },
+  /** A whoosh as a help is used. */
+  help() {
     const ac = audio();
     if (!ac || !master) return;
     const t = ac.currentTime;
@@ -198,6 +205,16 @@ export const sfx = {
     src.start(t);
     tone(ac, 660, t + 0.3, 0.18, { type: 'triangle', volume: 0.15 });
   },
+  /** A few taps of a telegraph key. */
+  telegram() {
+    const ac = audio();
+    if (!ac) return;
+    let at = ac.currentTime + 0.02;
+    for (const dur of [0.18, 0.18, 0.06]) {
+      tone(ac, 750, at, dur, { volume: 0.12 });
+      at += dur + 0.07;
+    }
+  },
   tick() {
     const ac = audio();
     if (ac) tone(ac, 1400, ac.currentTime, 0.04, { type: 'triangle', volume: 0.08 });
@@ -208,4 +225,51 @@ export const sfx = {
       [C5, 0.22],
       [G4, 0.6],
     ]),
+  /** A rising call as the player leaves the welcome screen. */
+  ready: () =>
+    bugleCall([
+      [C5, 0.14],
+      [E5, 0.14],
+      [G5, 0.5],
+    ]),
 };
+
+/**
+ * Old-radio static for the 1940 bulletin: a tuning whistle, then a low crackle
+ * that runs until the returned function stops it. Null when sound is off.
+ */
+export function radioStatic(): (() => void) | null {
+  const ac = audio();
+  if (!ac || !master) return null;
+  const t = ac.currentTime;
+  // Two seconds of brown noise with the odd pop, looped.
+  const buffer = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
+  const data = buffer.getChannelData(0);
+  let last = 0;
+  for (let i = 0; i < data.length; i++) {
+    last = (last + 0.02 * (Math.random() * 2 - 1)) / 1.02;
+    data[i] = last * 3.5 + (Math.random() < 0.0006 ? Math.random() - 0.5 : 0);
+  }
+  const src = ac.createBufferSource();
+  const band = ac.createBiquadFilter();
+  const gain = ac.createGain();
+  src.buffer = buffer;
+  src.loop = true;
+  band.type = 'bandpass';
+  band.frequency.value = 1700;
+  band.Q.value = 0.6;
+  gain.gain.setValueAtTime(0.0001, t);
+  gain.gain.exponentialRampToValueAtTime(0.55, t + 0.12);
+  gain.gain.exponentialRampToValueAtTime(0.1, t + 1.5);
+  src.connect(band).connect(gain).connect(master);
+  track(src);
+  src.start(t);
+  tone(ac, 2300, t + 0.05, 1.2, { volume: 0.05, slideTo: 440 });
+  return () => {
+    const now = ac.currentTime;
+    gain.gain.cancelScheduledValues(now);
+    gain.gain.setValueAtTime(Math.max(gain.gain.value, 0.0002), now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+    src.stop(now + 0.45);
+  };
+}

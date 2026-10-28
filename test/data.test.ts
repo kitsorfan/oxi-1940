@@ -36,6 +36,16 @@ describe('question bank', () => {
     }
   });
 
+  it('gives every question a Telegram clue that does not spell out the answer', () => {
+    for (const q of questions) {
+      expect(filled(q.hint), `${q.id} hint`).toBe(true);
+      const answer = q.kind === 'choice' ? q.answer : q.place;
+      for (const lang of ['en', 'el'] as const) {
+        expect(q.hint[lang].toLowerCase(), `${q.id} ${lang}`).not.toContain(answer[lang].toLowerCase());
+      }
+    }
+  });
+
   it('gives each choice question four distinct options in both languages', () => {
     for (const q of questions) {
       if (q.kind !== 'choice') continue;

@@ -562,18 +562,6 @@ export const images = {
       el: 'Ο αρχιεπίσκοπος Αθηνών Δαμασκηνός, 1945',
     },
   },
-  'partisans': {
-    file: 'Αντάρτες του ΕΑΜ-ΕΛΑΣ.jpg',
-    width: 960,
-    height: 735,
-    author: 'Sgt. Johnson; via the Hellenic Ministry of Foreign Affairs',
-    license: 'CC BY-SA 2.0',
-    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
-    caption: {
-      en: 'Young partisans of ELAS on Mount Parnitha',
-      el: 'Νεαροί αντάρτες του ΕΛΑΣ στην Πάρνηθα',
-    },
-  },
   'thessaloniki-jews': {
     file: 'Bundesarchiv Bild 101I-168-0894-21A, Griechenland, Saloniki, Erfassung von Juden.jpg',
     width: 800,

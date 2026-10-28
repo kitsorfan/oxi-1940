@@ -4,6 +4,7 @@ import { Home } from './components/Home';
 import { FlagMark, SoundIcon } from './components/Icons';
 import { Quiz, type AnswerRecord } from './components/Quiz';
 import { Results } from './components/Results';
+import { Welcome, isWelcomeSeen } from './components/Welcome';
 import { chapters } from './data/chapters';
 import { buildRound, medalFor, type RoundItem } from './game/engine';
 import { isBetter, loadProgress, saveResult, type Progress } from './game/progress';
@@ -25,7 +26,13 @@ export function App() {
   const [screen, setScreen] = useState<Screen>({ name: 'home' });
   const [progress, setProgress] = useState<Progress>(loadProgress);
   const [muted, setMutedState] = useState(isMuted);
+  const [welcome, setWelcome] = useState(() => !isWelcomeSeen());
   const value = useMemo(() => makeLangValue(lang, setLangState), [lang]);
+
+  const closeWelcome = () => {
+    setWelcome(false);
+    sfx.tick();
+  };
 
   const toggleSound = () => {
     setMuted(!muted);
@@ -136,12 +143,18 @@ export function App() {
         )}
       </main>
 
+      {welcome && <Welcome onClose={closeWelcome} />}
+
       {screen.name !== 'quiz' && (
         <footer className="footer">
           <p>
             {lang === 'el' ? 'Φωτογραφίες και χάρτες: Wikimedia Commons' : 'Photos and maps: Wikimedia Commons'} ·{' '}
             <button type="button" className="link" onClick={() => go({ name: 'about' })}>
               {strings.aboutTitle[lang]}
+            </button>{' '}
+            ·{' '}
+            <button type="button" className="link" onClick={() => setWelcome(true)}>
+              {strings.howToPlay[lang]}
             </button>
           </p>
           <p>

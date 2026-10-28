@@ -16,6 +16,10 @@ export const invasion: Chapter = {
       prompt: t('On which date did Germany invade Greece?', 'Ποια μέρα εισέβαλε η Γερμανία στην Ελλάδα;'),
       answer: t('6 April 1941', '6 Απριλίου 1941'),
       wrong: [t('28 October 1940', '28 Οκτωβρίου 1940'), t('25 March 1941', '25 Μαρτίου 1941'), t('20 May 1941', '20 Μαΐου 1941')],
+      hint: t(
+        'Germany struck in early spring 1941, months after Italy’s attack and weeks before the battle for Crete.',
+        'Η Γερμανία χτύπησε στις αρχές της άνοιξης του 1941, μήνες μετά την ιταλική επίθεση και εβδομάδες πριν από τη μάχη της Κρήτης.',
+      ),
       fact: t(
         'Germany came to the rescue of its defeated ally. That same morning it also invaded Yugoslavia.',
         'Η Γερμανία έσπευσε να σώσει τον ηττημένο σύμμαχό της. Το ίδιο πρωί εισέβαλε και στη Γιουγκοσλαβία.',
@@ -26,6 +30,10 @@ export const invasion: Chapter = {
       prompt: t('What was the codename of the German invasion of Greece?', 'Ποια ήταν η κωδική ονομασία της γερμανικής εισβολής στην Ελλάδα;'),
       answer: t('Operation Marita', 'Επιχείρηση «Μαρίτα»'),
       wrong: [t('Operation Barbarossa', 'Επιχείρηση «Μπαρμπαρόσα»'), t('Operation Sea Lion', 'Επιχείρηση «Θαλάσσιος Λέων»'), t('Operation Overlord', 'Επιχείρηση «Overlord»')],
+      hint: t(
+        'It wasn’t the plan to attack the Soviet Union, nor the Allied landings in Normandy in 1944.',
+        'Δεν ήταν ούτε το σχέδιο επίθεσης κατά της Σοβιετικής Ένωσης ούτε η συμμαχική απόβαση στη Νορμανδία το 1944.',
+      ),
       fact: t(
         'Barbarossa was the invasion of the Soviet Union on 22 June 1941. Many historians believe the Balkan campaign helped delay it.',
         '«Μπαρμπαρόσα» ήταν η εισβολή στη Σοβιετική Ένωση στις 22 Ιουνίου 1941. Πολλοί ιστορικοί θεωρούν ότι η εκστρατεία στα Βαλκάνια συνέβαλε στην καθυστέρησή της.',
@@ -37,6 +45,10 @@ export const invasion: Chapter = {
       prompt: t('From which country did most German forces attack Greece?', 'Από ποια χώρα επιτέθηκαν στην Ελλάδα οι περισσότερες γερμανικές δυνάμεις;'),
       answer: t('Bulgaria', 'Από τη Βουλγαρία'),
       wrong: [t('Albania', 'Από την Αλβανία'), t('Turkey', 'Από την Τουρκία'), t('Italy, by sea', 'Από την Ιταλία, διά θαλάσσης')],
+      hint: t(
+        'Germany came overland, through a neighbour to the north that had opened its borders to its troops.',
+        'Οι Γερμανοί ήρθαν από ξηράς, μέσα από μια γειτονική χώρα στα βόρεια που είχε ανοίξει τα σύνορά της στα στρατεύματά τους.',
+      ),
       fact: t(
         'Bulgaria had joined the Axis on 1 March 1941 and let German troops gather on its soil. Other German columns swept down through Yugoslavia.',
         'Η Βουλγαρία είχε προσχωρήσει στον Άξονα την 1η Μαρτίου 1941 και επέτρεψε να συγκεντρωθούν γερμανικά στρατεύματα στο έδαφός της. Άλλες γερμανικές φάλαγγες κατέβηκαν μέσω Γιουγκοσλαβίας.',
@@ -48,6 +60,10 @@ export const invasion: Chapter = {
       prompt: t('What was the chain of forts on the Greek–Bulgarian border called?', 'Πώς ονομαζόταν η αλυσίδα οχυρών στα ελληνοβουλγαρικά σύνορα;'),
       answer: t('The Metaxas Line', 'Η Γραμμή Μεταξά'),
       wrong: [t('The Maginot Line', 'Η Γραμμή Μαζινό'), t('The Siegfried Line', 'Η Γραμμή Ζίγκφριντ'), t('The Mannerheim Line', 'Η Γραμμή Μάνερχαϊμ')],
+      hint: t(
+        'Think of who was ruling Greece when work on the forts began in the 1930s.',
+        'Σκέψου ποιος κυβερνούσε την Ελλάδα όταν άρχισε η κατασκευή των οχυρών, τη δεκαετία του 1930.',
+      ),
       fact: t(
         'Built from 1936, it stretched along the mountains of Macedonia and Thrace. Its defenders held out for days against heavy German attacks.',
         'Χτίστηκε από το 1936 και απλωνόταν στα βουνά της Μακεδονίας και της Θράκης. Οι υπερασπιστές της άντεξαν για μέρες απέναντι σε σφοδρές γερμανικές επιθέσεις.',
@@ -62,6 +78,10 @@ export const invasion: Chapter = {
       place: t('Fort Rupel', 'Οχυρό Ρούπελ'),
       lat: 41.36,
       lon: 23.35,
+      hint: t(
+        'Look north of Serres, at the narrow gorge where the Strymon flows in from Bulgaria.',
+        'Ψάξε βόρεια από τις Σέρρες, στο στενό όπου ο Στρυμόνας μπαίνει στην Ελλάδα από τη Βουλγαρία.',
+      ),
       fact: t(
         'Despite dive-bombers and heavy artillery, Fort Rupel never fell. It laid down its arms only after the Greek army in Macedonia capitulated.',
         'Παρά τα βομβαρδιστικά κάθετης εφόρμησης και το βαρύ πυροβολικό, το Ρούπελ δεν έπεσε ποτέ. Κατέθεσε τα όπλα μόνο όταν συνθηκολόγησε ο ελληνικός στρατός της Μακεδονίας.',
@@ -73,6 +93,10 @@ export const invasion: Chapter = {
       prompt: t('Which city fell to the Germans on 9 April 1941, cutting off the forts?', 'Ποια πόλη έπεσε στους Γερμανούς στις 9 Απριλίου 1941, αποκόπτοντας τα οχυρά;'),
       answer: t('Thessaloniki', 'Η Θεσσαλονίκη'),
       wrong: [t('Athens', 'Η Αθήνα'), t('Ioannina', 'Τα Ιωάννινα'), t('Larissa', 'Η Λάρισα')],
+      hint: t(
+        'Look for a city close behind the forts, not one in the far south or over in the west.',
+        'Ψάξε μια πόλη λίγο πιο πίσω από τα οχυρά, όχι κάπου στον μακρινό νότο ή στα δυτικά.',
+      ),
       fact: t(
         'German armour came down through Yugoslavia and the Axios valley, going round the Metaxas Line from the west.',
         'Τα γερμανικά τεθωρακισμένα κατέβηκαν μέσω Γιουγκοσλαβίας και της κοιλάδας του Αξιού, παρακάμπτοντας τη Γραμμή Μεταξά από τα δυτικά.',
@@ -94,6 +118,10 @@ export const invasion: Chapter = {
         t('They sent them all to camps in Poland', 'Τους έστειλαν όλους σε στρατόπεδα στην Πολωνία'),
         t('They took no notice of them', 'Τους αγνόησαν'),
       ],
+      hint: t(
+        'Even the attackers knew they had faced a brave and stubborn defence.',
+        'Ακόμη και οι επιτιθέμενοι ήξεραν ότι είχαν αντιμετωπίσει μια γενναία και πεισματική άμυνα.',
+      ),
       fact: t(
         'Impressed by the resistance, the Germans let the garrisons leave with their flags. The stand of the forts has become a legend in Greece.',
         'Εντυπωσιασμένοι από την αντίσταση, οι Γερμανοί άφησαν τις φρουρές να αποχωρήσουν με τις σημαίες τους. Η άμυνα των οχυρών έγινε θρύλος στην Ελλάδα.',
@@ -105,6 +133,10 @@ export const invasion: Chapter = {
       prompt: t('Which Allied troops came to fight beside the Greeks in April 1941?', 'Ποια συμμαχικά στρατεύματα ήρθαν να πολεμήσουν δίπλα στους Έλληνες τον Απρίλιο του 1941;'),
       answer: t('British, Australian and New Zealand troops', 'Βρετανοί, Αυστραλοί και Νεοζηλανδοί'),
       wrong: [t('American and Canadian troops', 'Αμερικανοί και Καναδοί'), t('French and Polish troops', 'Γάλλοι και Πολωνοί'), t('Soviet troops', 'Σοβιετικοί')],
+      hint: t(
+        'In April 1941 neither the USA nor the USSR was yet at war with Germany.',
+        'Τον Απρίλιο του 1941 ούτε οι ΗΠΑ ούτε η Σοβιετική Ένωση είχαν μπει ακόμη στον πόλεμο κατά της Γερμανίας.',
+      ),
       fact: t(
         'About 60,000 Commonwealth soldiers were sent to Greece. The Australians and New Zealanders formed the ANZAC Corps again, as in the First World War.',
         'Περίπου 60.000 στρατιώτες της Βρετανικής Κοινοπολιτείας στάλθηκαν στην Ελλάδα. Αυστραλοί και Νεοζηλανδοί σχημάτισαν ξανά το Σώμα ANZAC, όπως στον Α΄ Παγκόσμιο Πόλεμο.',
@@ -119,6 +151,10 @@ export const invasion: Chapter = {
       ),
       answer: t('General Georgios Tsolakoglou', 'Ο στρατηγός Γεώργιος Τσολάκογλου'),
       wrong: [t('Alexandros Papagos', 'Ο Αλέξανδρος Παπάγος'), t('Charalambos Katsimitros', 'Ο Χαράλαμπος Κατσιμήτρος'), t('Konstantinos Davakis', 'Ο Κωνσταντίνος Δαβάκης')],
+      hint: t(
+        'Not the commander-in-chief, but a front-line general whom the occupiers would soon reward.',
+        'Όχι ο αρχιστράτηγος, αλλά ένας στρατηγός του μετώπου που σύντομα θα τον αντάμειβαν οι κατακτητές.',
+      ),
       fact: t(
         'Tsolakoglou signed on 20 April 1941 and soon became the first collaborationist Prime Minister under the occupation.',
         'Ο Τσολάκογλου υπέγραψε στις 20 Απριλίου 1941 και λίγο αργότερα έγινε ο πρώτος πρωθυπουργός-δοσίλογος της Κατοχής.',
@@ -133,6 +169,10 @@ export const invasion: Chapter = {
       place: t('Thermopylae', 'Θερμοπύλες'),
       lat: 38.8,
       lon: 22.54,
+      hint: t(
+        'Look near Lamia, where the mountains meet the Malian Gulf on the road south to Athens.',
+        'Ψάξε κοντά στη Λαμία, εκεί όπου τα βουνά συναντούν τον Μαλιακό κόλπο, στον δρόμο προς την Αθήνα.',
+      ),
       fact: t(
         'Australian and New Zealand troops held the pass on 24–25 April 1941, covering the evacuation of the Allied army.',
         'Αυστραλοί και Νεοζηλανδοί κράτησαν το πέρασμα στις 24–25 Απριλίου 1941, καλύπτοντας την εκκένωση του συμμαχικού στρατού.',
@@ -144,6 +184,10 @@ export const invasion: Chapter = {
       prompt: t('Thermopylae was famous long before 1941. Why?', 'Οι Θερμοπύλες ήταν ξακουστές πολύ πριν από το 1941. Γιατί;'),
       answer: t('Leonidas and the 300 Spartans fought the Persians there', 'Εκεί πολέμησαν ο Λεωνίδας και οι 300 Σπαρτιάτες τους Πέρσες'),
       wrong: [t('The Battle of Marathon was fought there', 'Εκεί δόθηκε η μάχη του Μαραθώνα'), t('It was the site of Troy', 'Εκεί βρισκόταν η Τροία'), t('The first Olympic Games were held there', 'Εκεί έγιναν οι πρώτοι Ολυμπιακοί Αγώνες')],
+      hint: t(
+        'Think of a famous last stand against a huge invading army from the east.',
+        'Σκέψου μια ξακουστή ηρωική αντίσταση μέχρι τέλους απέναντι σε έναν τεράστιο στρατό από την Ανατολή.',
+      ),
       fact: t(
         'In 480 BC Leonidas and his men held the pass against the army of Xerxes. “Molon labe” (“Come and take them”) is the reply attributed to him.',
         'Το 480 π.Χ. ο Λεωνίδας και οι άνδρες του κράτησαν το πέρασμα απέναντι στον στρατό του Ξέρξη. Σε εκείνον αποδίδεται η απάντηση «Μολών λαβέ».',
@@ -154,6 +198,10 @@ export const invasion: Chapter = {
       prompt: t('When did German troops enter Athens?', 'Πότε μπήκαν τα γερμανικά στρατεύματα στην Αθήνα;'),
       answer: t('27 April 1941', '27 Απριλίου 1941'),
       wrong: [t('6 April 1941', '6 Απριλίου 1941'), t('15 March 1941', '15 Μαρτίου 1941'), t('1 June 1941', '1 Ιουνίου 1941')],
+      hint: t(
+        'The Germans needed a few weeks of fighting to get there, and Crete was still to come.',
+        'Οι Γερμανοί χρειάστηκαν μερικές εβδομάδες αγώνα για να φτάσουν ως εκεί, ενώ η Κρήτη δεν είχε δεχτεί ακόμη επίθεση.',
+      ),
       fact: t(
         'On the morning of 27 April German columns entered an almost deserted city. Soon the swastika flag flew over the Acropolis.',
         'Το πρωί της 27ης Απριλίου γερμανικές φάλαγγες μπήκαν σε μια σχεδόν έρημη πόλη. Σύντομα η σημαία με τον αγκυλωτό σταυρό κυμάτιζε στην Ακρόπολη.',
@@ -168,6 +216,10 @@ export const invasion: Chapter = {
       ),
       answer: t('The cruiser Georgios Averof', 'Το «Γεώργιος Αβέρωφ»'),
       wrong: [t('The cruiser Elli', 'Η «Έλλη»'), t('The battleship Kilkis', 'Το «Κιλκίς»'), t('The destroyer Hydra', 'Η «Ύδρα»')],
+      hint: t(
+        'Elli had already been sunk at Tinos in 1940, so think of the fleet’s veteran flagship.',
+        'Η «Έλλη» είχε ήδη βυθιστεί στην Τήνο το 1940, οπότε σκέψου την παλαίμαχη ναυαρχίδα του στόλου.',
+      ),
       fact: t(
         'Averof served with the Allies until the liberation. Today it is a floating museum at Palaio Faliro, near Athens.',
         'Το «Αβέρωφ» υπηρέτησε με τους Συμμάχους ως την Απελευθέρωση. Σήμερα είναι πλωτό μουσείο στο Παλαιό Φάληρο.',
@@ -181,6 +233,7 @@ export const invasion: Chapter = {
       ),
       answer: t('To Crete, and then to Egypt', 'Στην Κρήτη και έπειτα στην Αίγυπτο'),
       wrong: [t('Straight to London', 'Κατευθείαν στο Λονδίνο'), t('To Switzerland', 'Στην Ελβετία'), t('To Cyprus, then Turkey', 'Στην Κύπρο και έπειτα στην Τουρκία')],
+      hint: t('Their first stops were in the eastern Mediterranean, under British protection.', 'Οι πρώτοι τους σταθμοί ήταν στην ανατολική Μεσόγειο, υπό βρετανική προστασία.'),
       fact: t(
         'The Greek government-in-exile kept Greece in the war on the Allied side, with the navy and the units that escaped to the Middle East.',
         'Η εξόριστη ελληνική κυβέρνηση κράτησε την Ελλάδα στον πόλεμο στο πλευρό των Συμμάχων, με το ναυτικό και τις μονάδες που διέφυγαν στη Μέση Ανατολή.',
@@ -194,6 +247,10 @@ export const invasion: Chapter = {
       ),
       answer: t('That they had fought with the highest courage', 'Ότι πολέμησαν με εξαιρετική γενναιότητα'),
       wrong: [t('That they had been on Germany’s side', 'Ότι ήταν στο πλευρό της Γερμανίας'), t('That they had hardly fought', 'Ότι σχεδόν δεν πολέμησαν'), t('Nothing at all', 'Τίποτα απολύτως')],
+      hint: t(
+        'Hitler could hardly pretend the Greeks had given in easily after six months of war.',
+        'Ο Χίτλερ δύσκολα θα ισχυριζόταν ότι οι Έλληνες λύγισαν εύκολα, ύστερα από έξι μήνες πολέμου.',
+      ),
       fact: t(
         'Speaking in the Reichstag, Hitler said that “the Greek soldier particularly fought with the highest courage”, rare praise from an enemy.',
         'Μιλώντας στο Ράιχσταγκ, ο Χίτλερ είπε ότι «ο Έλληνας στρατιώτης πολέμησε με τη μεγαλύτερη γενναιότητα», σπάνιος έπαινος από έναν εχθρό.',
@@ -212,6 +269,7 @@ export const invasion: Chapter = {
         t('It was the first invasion by submarine', 'Ήταν η πρώτη εισβολή με υποβρύχια'),
         t('It was fought only at night', 'Δόθηκε μόνο τη νύχτα'),
       ],
+      hint: t('The first wave did not come by sea, and it arrived in the morning, in daylight.', 'Το πρώτο κύμα δεν ήρθε από τη θάλασσα και έφτασε πρωί, με το φως της ημέρας.'),
       fact: t(
         'Thousands of German paratroopers and glider troops landed around Maleme, Chania, Rethymno and Heraklion. The Germans called it Operation Mercury.',
         'Χιλιάδες Γερμανοί αλεξιπτωτιστές και στρατιώτες με ανεμόπτερα έπεσαν γύρω από το Μάλεμε, τα Χανιά, το Ρέθυμνο και το Ηράκλειο. Οι Γερμανοί την ονόμασαν Επιχείρηση «Ερμής».',
@@ -226,6 +284,7 @@ export const invasion: Chapter = {
       place: t('Maleme', 'Μάλεμε'),
       lat: 35.53,
       lon: 23.83,
+      hint: t('Look on the north coast of western Crete, a short way west of Chania.', 'Ψάξε στη βόρεια ακτή της δυτικής Κρήτης, λίγο δυτικά από τα Χανιά.'),
       fact: t(
         'Once the Germans captured Maleme airfield, they could fly in reinforcements, and the battle turned in their favour.',
         'Όταν οι Γερμανοί κατέλαβαν το αεροδρόμιο του Μάλεμε, μπόρεσαν να φέρουν ενισχύσεις αεροπορικώς και η μάχη έγειρε υπέρ τους.',
@@ -237,6 +296,10 @@ export const invasion: Chapter = {
       prompt: t('Who commanded the Allied defenders of Crete?', 'Ποιος διοικούσε τους συμμαχικούς υπερασπιστές της Κρήτης;'),
       answer: t('General Bernard Freyberg of New Zealand', 'Ο Νεοζηλανδός στρατηγός Μπέρναρντ Φράιμπεργκ'),
       wrong: [t('Bernard Montgomery', 'Ο Μπέρναρντ Μοντγκόμερι'), t('Dwight Eisenhower', 'Ο Ντουάιτ Αϊζενχάουερ'), t('Charles de Gaulle', 'Ο Σαρλ ντε Γκωλ')],
+      hint: t(
+        'Rule out the American, whose country was not yet at war, and the Free French leader in London.',
+        'Απόκλεισε τον Αμερικανό, αφού η χώρα του δεν είχε μπει ακόμη στον πόλεμο, και τον αρχηγό των Ελεύθερων Γάλλων στο Λονδίνο.',
+      ),
       fact: t(
         'Freyberg, a decorated hero of the First World War, led British, Australian, New Zealand and Greek troops on the island.',
         'Ο Φράιμπεργκ, παρασημοφορημένος ήρωας του Α΄ Παγκοσμίου Πολέμου, διοικούσε στο νησί Βρετανούς, Αυστραλούς, Νεοζηλανδούς και Έλληνες.',
@@ -248,6 +311,7 @@ export const invasion: Chapter = {
       prompt: t('Who fought the invaders alongside the soldiers in Crete?', 'Ποιοι πολέμησαν τους εισβολείς στην Κρήτη μαζί με τους στρατιώτες;'),
       answer: t('Cretan civilians: men, women, even priests and old people', 'Οι άμαχοι Κρητικοί: άνδρες, γυναίκες, ακόμη και ιερείς και γέροντες'),
       wrong: [t('Nobody: the island was almost empty', 'Κανείς: το νησί ήταν σχεδόν άδειο'), t('Volunteers from Turkey', 'Εθελοντές από την Τουρκία'), t('Italian deserters', 'Ιταλοί λιποτάκτες')],
+      hint: t('Think of Crete’s long tradition of rising up against foreign rulers.', 'Θυμήσου τη μακρά παράδοση της Κρήτης στις εξεγέρσεις ενάντια στους ξένους κατακτητές.'),
       fact: t(
         'Armed with old rifles, axes and even kitchen knives, Cretans fought the paratroopers. The Germans answered with brutal reprisals against villages such as Kondomari and Kandanos.',
         'Με παλιά τουφέκια, τσεκούρια ακόμη και μαχαίρια της κουζίνας, οι Κρητικοί πολέμησαν τους αλεξιπτωτιστές. Οι Γερμανοί απάντησαν με άγρια αντίποινα σε χωριά όπως το Κοντομαρί και η Κάντανος.',
@@ -259,6 +323,10 @@ export const invasion: Chapter = {
       prompt: t('German losses in Crete were so heavy that Hitler…', 'Οι γερμανικές απώλειες στην Κρήτη ήταν τόσο βαριές, που ο Χίτλερ…'),
       answer: t('never again ordered a large airborne invasion', 'δεν διέταξε ποτέ ξανά μεγάλη αεραποβατική εισβολή'),
       wrong: [t('handed Crete over to Italy', 'παραχώρησε την Κρήτη στην Ιταλία'), t('withdrew from Greece', 'αποσύρθηκε από την Ελλάδα'), t('put up a monument to the Cretans', 'έστησε μνημείο για τους Κρητικούς')],
+      hint: t(
+        'The heaviest losses fell on the elite troops who had spearheaded the attack.',
+        'Τις βαρύτερες απώλειες τις υπέστησαν τα επίλεκτα στρατεύματα που αποτέλεσαν την αιχμή της επίθεσης.',
+      ),
       fact: t(
         '“The day of the paratrooper is over,” Hitler told General Kurt Student. Crete fell on 1 June 1941, but at a very high price.',
         '«Η εποχή των αλεξιπτωτιστών τελείωσε», είπε ο Χίτλερ στον στρατηγό Κουρτ Στούντεντ. Η Κρήτη έπεσε την 1η Ιουνίου 1941, αλλά με πολύ βαρύ τίμημα.',
