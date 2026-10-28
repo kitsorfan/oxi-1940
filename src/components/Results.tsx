@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { renderCertificate } from '../game/certificate';
 import { medalFor, type Medal } from '../game/engine';
-import { shareLinks } from '../game/share';
 import { useLang } from '../i18n/LangContext';
-import { SITE_URL, fill } from '../i18n/strings';
+import { fill } from '../i18n/strings';
 import type { L } from '../types';
 import { Confetti } from './Confetti';
-import { ArrowIcon, CheckIcon, CrossIcon, DownloadIcon, LinkedInIcon } from './Icons';
+import { ArrowIcon, CheckIcon, CrossIcon, DownloadIcon } from './Icons';
 import { MedalBadge } from './MedalBadge';
 import type { AnswerRecord } from './Quiz';
 import { ShareMenu } from './ShareMenu';
@@ -80,8 +79,6 @@ export function Results({ title, records, points, isNewBest, onReplay, onHome }:
     }
   };
 
-  const linkedIn = shareLinks(shareText, SITE_URL, s('appName')).linkedin;
-
   return (
     <div className="results">
       {medal && <Confetti pieces={medal === 'gold' ? 140 : 90} />}
@@ -127,10 +124,7 @@ export function Results({ title, records, points, isNewBest, onReplay, onHome }:
         )}
 
         <div className="results__share">
-          <ShareMenu text={shareText} getFile={medal && name.trim() ? certificate : undefined} />
-          <a className="btn btn--linkedin" href={linkedIn} target="_blank" rel="noreferrer">
-            <LinkedInIcon /> {s('shareLinkedIn')}
-          </a>
+          <ShareMenu text={shareText} getFile={medal && name.trim() ? certificate : undefined} className="btn btn--share btn--lg" />
         </div>
 
         <div className="results__actions">

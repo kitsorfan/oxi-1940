@@ -69,7 +69,6 @@ export const strings = {
   certName: t('Your name', 'Το όνομά σου'),
   certDownload: t('Download certificate', 'Λήψη διπλώματος'),
   share: t('Share', 'Κοινοποίηση'),
-  shareLinkedIn: t('Share on LinkedIn', 'Κοινοποίηση στο LinkedIn'),
   shareTitle: t('Share with friends', 'Μοιράσου το με φίλους'),
   shareGame: t('Share the game', 'Μοιράσου το παιχνίδι'),
   shareInvite: t(

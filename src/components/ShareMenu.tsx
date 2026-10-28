@@ -21,12 +21,12 @@ const brand = (icon: { path: string }) => (
 );
 
 const TARGETS: { id: ShareTarget; label: string; color: string; icon: ReactNode; phoneOnly?: boolean }[] = [
+  { id: 'linkedin', label: 'LinkedIn', color: '#0A66C2', icon: <LinkedInIcon width={24} height={24} /> },
   { id: 'whatsapp', label: 'WhatsApp', color: '#25D366', icon: brand(siWhatsapp) },
   { id: 'viber', label: 'Viber', color: '#7360F2', icon: brand(siViber) },
   { id: 'messenger', label: 'Messenger', color: '#0866FF', icon: brand(siMessenger), phoneOnly: true },
   { id: 'telegram', label: 'Telegram', color: '#26A5E4', icon: brand(siTelegram) },
   { id: 'facebook', label: 'Facebook', color: '#0866FF', icon: brand(siFacebook) },
-  { id: 'linkedin', label: 'LinkedIn', color: '#0A66C2', icon: <LinkedInIcon width={24} height={24} /> },
   { id: 'x', label: 'X', color: '#000000', icon: brand(siX) },
   {
     id: 'email',
