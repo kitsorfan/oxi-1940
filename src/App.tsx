@@ -10,7 +10,7 @@ import { buildRound, medalFor, type RoundItem } from './game/engine';
 import { isBetter, loadProgress, saveResult, type Progress } from './game/progress';
 import { isMuted, setMuted, sfx } from './game/sound';
 import { LangContext, makeLangValue } from './i18n/LangContext';
-import { AUTHOR_URL, detectLang, strings } from './i18n/strings';
+import { AUTHOR_URL, detectLang, rememberLang, strings } from './i18n/strings';
 import type { L, Lang } from './types';
 
 type Screen =
@@ -27,7 +27,11 @@ export function App() {
   const [progress, setProgress] = useState<Progress>(loadProgress);
   const [muted, setMutedState] = useState(isMuted);
   const [welcome, setWelcome] = useState(() => !isWelcomeSeen());
-  const value = useMemo(() => makeLangValue(lang, setLangState), [lang]);
+  const chooseLang = (l: Lang) => {
+    rememberLang(l);
+    setLangState(l);
+  };
+  const value = useMemo(() => makeLangValue(lang, chooseLang), [lang]);
 
   const closeWelcome = () => {
     setWelcome(false);
@@ -43,11 +47,6 @@ export function App() {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.title = `${strings.appName[lang]} · ${strings.tagline[lang]}`;
-    try {
-      localStorage.setItem('oxi1940:lang', lang);
-    } catch {
-      // Not remembering the language is fine.
-    }
   }, [lang]);
 
   // Give the phone's back button somewhere to go: every screen but home is one history entry deep.
@@ -110,7 +109,7 @@ export function App() {
             </button>
             <div className="lang" role="group" aria-label="Language">
               {(['en', 'el'] as const).map((l) => (
-                <button key={l} type="button" className={l === lang ? 'lang__btn lang__btn--on' : 'lang__btn'} onClick={() => setLangState(l)} aria-pressed={l === lang}>
+                <button key={l} type="button" className={l === lang ? 'lang__btn lang__btn--on' : 'lang__btn'} onClick={() => chooseLang(l)} aria-pressed={l === lang}>
                   {l === 'en' ? 'EN' : 'ΕΛ'}
                 </button>
               ))}

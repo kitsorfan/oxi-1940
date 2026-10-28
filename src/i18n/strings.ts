@@ -194,14 +194,61 @@ export function caps(text: string, lang: Lang): string {
   return text.normalize('NFD').replace(/́/g, '').normalize('NFC').toUpperCase();
 }
 
+/** Only a language the visitor picks themselves is remembered, so detection keeps working. */
+const CHOICE_KEY = 'oxi1940:lang-choice';
+/** Earlier versions saved every detected language here; it is ignored and cleared. */
+const OLD_KEY = 'oxi1940:lang';
+const GREEK_TIME_ZONES = ['Europe/Athens', 'Asia/Nicosia', 'Asia/Famagusta'];
+
+export interface LangSignals {
+  /** The `?lang=` of the link. */
+  param: string | null;
+  /** A language the visitor picked with the switch. */
+  choice: string | null;
+  /** The browser’s preferred languages, most preferred first. */
+  languages: readonly string[];
+  timeZone?: string;
+}
+
+/**
+ * A `?lang=` link wins, then the visitor’s own choice. Otherwise Greek if the browser lists
+ * Greek among its languages (many Greeks run their browser in English) or the clock is set
+ * to Greece or Cyprus; English for everyone else.
+ */
+export function pickLang({ param, choice, languages, timeZone }: LangSignals): Lang {
+  for (const value of [param, choice]) if (value === 'el' || value === 'en') return value;
+  if (languages.some((l) => l.toLowerCase().startsWith('el'))) return 'el';
+  if (timeZone && GREEK_TIME_ZONES.includes(timeZone)) return 'el';
+  return 'en';
+}
+
 export function detectLang(): Lang {
-  const param = new URLSearchParams(window.location.search).get('lang');
-  if (param === 'el' || param === 'en') return param;
+  let choice: string | null = null;
   try {
-    const saved = localStorage.getItem('oxi1940:lang');
-    if (saved === 'el' || saved === 'en') return saved;
+    choice = localStorage.getItem(CHOICE_KEY);
+    localStorage.removeItem(OLD_KEY);
   } catch {
-    // Storage can be unavailable (private mode); fall back to the browser language.
+    // Storage can be unavailable (private mode); detection still works.
   }
-  return navigator.language.toLowerCase().startsWith('el') ? 'el' : 'en';
+  let timeZone: string | undefined;
+  try {
+    timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  } catch {
+    // An old browser without time zones: rely on the languages alone.
+  }
+  return pickLang({
+    param: new URLSearchParams(window.location.search).get('lang'),
+    choice,
+    languages: navigator.languages?.length ? navigator.languages : [navigator.language],
+    timeZone,
+  });
+}
+
+/** Remembers a language the visitor picked with the switch. */
+export function rememberLang(lang: Lang) {
+  try {
+    localStorage.setItem(CHOICE_KEY, lang);
+  } catch {
+    // It will just be detected again next time.
+  }
 }
