@@ -615,9 +615,8 @@ h3 {
   z-index: 20;
   margin: 0 calc(var(--gutter) * -1);
   padding: 10px var(--gutter) 10px;
-  background: rgba(245, 240, 230, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--paper);
+  box-shadow: 0 6px 12px -10px rgba(11, 37, 69, 0.35);
   border-bottom: 1px solid var(--line);
 }
 
