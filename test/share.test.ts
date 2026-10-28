@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { sounds } from '../src/data/sounds';
 import { shareLinks } from '../src/game/share';
 
 describe('share links', () => {
@@ -17,3 +18,9 @@ describe('share links', () => {
   });
 });
 
+describe('sounds', () => {
+  it('ships every credited recording, and only those', () => {
+    const files = Object.keys(import.meta.glob('../public/sounds/*')).map((path) => path.slice(path.lastIndexOf('/') + 1));
+    expect(files.sort()).toEqual(sounds.map((sound) => sound.name).sort());
+  });
+});

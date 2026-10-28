@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { fiftyFifty, mapSplit, pointsFor, type MapSplit, type RoundItem } from '../game/engine';
 import { distanceKm, project, unproject, type Point } from '../game/geo';
+import { sfx } from '../game/sound';
 import { useLang } from '../i18n/LangContext';
 import { fill, strings } from '../i18n/strings';
 import type { L } from '../types';
@@ -51,6 +52,9 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
       const nextStreak = ok ? streak + 1 : 0;
       const gained = pointsFor(ok, nextStreak, usedFiftyHere);
       const answer: L = item.kind === 'choice' ? item.question.answer : item.question.place;
+      if (!ok) sfx.wrong();
+      else if (nextStreak % 3 === 0) sfx.streak();
+      else sfx.correct();
       setStreak(nextStreak);
       setPoints((p) => p + gained);
       setRecords((r) => [...r, { id: item.question.id, prompt: item.question.prompt, answer, ok, km }]);
@@ -78,6 +82,7 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
   const useFifty = () => {
     if (fiftyUsedAt !== null || revealed) return;
     setFiftyUsedAt(index);
+    sfx.fifty();
     if (item.kind === 'choice') setRemoved(fiftyFifty(item));
     else setSplit(mapSplit(project(item.question.lat, item.question.lon)));
   };
@@ -88,6 +93,7 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
       onFinish(records, points);
       return;
     }
+    sfx.tick();
     setIndex((i) => i + 1);
     setPicked(null);
     setGuess(null);
@@ -197,7 +203,16 @@ export function Quiz({ title, round, onQuit, onFinish }: Props) {
             </ul>
           ) : (
             <>
-              <MapPicker question={item.question} guess={guess} revealed={revealed} split={split} onGuess={setGuess} />
+              <MapPicker
+                question={item.question}
+                guess={guess}
+                revealed={revealed}
+                split={split}
+                onGuess={(p) => {
+                  sfx.pin();
+                  setGuess(p);
+                }}
+              />
               {!revealed && (
                 <button type="button" className="btn btn--primary btn--block" onClick={confirmGuess} disabled={!guess}>
                   <PinIcon /> {s('mapConfirm')}

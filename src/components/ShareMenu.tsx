@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { siFacebook, siMessenger, siTelegram, siViber, siWhatsapp, siX } from 'simple-icons';
 import { isPhone, shareLinks, type ShareTarget } from '../game/share';
+import { sfx } from '../game/sound';
 import { useLang } from '../i18n/LangContext';
 import { SITE_URL } from '../i18n/strings';
 import { CrossIcon, LinkedInIcon, ShareIcon } from './Icons';
@@ -62,6 +63,7 @@ export function ShareMenu({ text, getFile, className = 'btn btn--ghost', label }
   }, [open]);
 
   const show = () => {
+    sfx.tick();
     setCopied(false);
     setOpen(true);
   };

@@ -111,6 +111,13 @@ export const strings = {
   imageCredits: t('Image credits', 'Πηγές εικόνων'),
   back: t('Back', 'Πίσω'),
   language: t('Ελληνικά', 'English'),
+  soundOn: t('Sound on', 'Ήχος ανοιχτός'),
+  soundOff: t('Sound off', 'Ήχος κλειστός'),
+  soundCredits: t('Sounds', 'Ήχοι'),
+  soundSynth: t(
+    'The other sound effects, including the short bugle flourish for a streak, are synthesised in the browser.',
+    'Τα υπόλοιπα ηχητικά εφέ, μαζί με το σύντομο σάλπισμα για κάθε σερί, παράγονται απευθείας στο πρόγραμμα περιήγησης.',
+  ),
 } as const;
 
 export type StringKey = keyof typeof strings;

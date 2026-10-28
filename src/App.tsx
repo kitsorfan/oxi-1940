@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { About } from './components/About';
 import { Home } from './components/Home';
-import { FlagMark } from './components/Icons';
+import { FlagMark, SoundIcon } from './components/Icons';
 import { Quiz, type AnswerRecord } from './components/Quiz';
 import { Results } from './components/Results';
 import { chapters } from './data/chapters';
 import { buildRound, medalFor, type RoundItem } from './game/engine';
 import { isBetter, loadProgress, saveResult, type Progress } from './game/progress';
+import { isMuted, setMuted, sfx } from './game/sound';
 import { LangContext, makeLangValue } from './i18n/LangContext';
 import { AUTHOR_URL, detectLang, strings } from './i18n/strings';
 import type { L, Lang } from './types';
@@ -23,7 +24,14 @@ export function App() {
   const [lang, setLangState] = useState<Lang>(detectLang);
   const [screen, setScreen] = useState<Screen>({ name: 'home' });
   const [progress, setProgress] = useState<Progress>(loadProgress);
+  const [muted, setMutedState] = useState(isMuted);
   const value = useMemo(() => makeLangValue(lang, setLangState), [lang]);
+
+  const toggleSound = () => {
+    setMuted(!muted);
+    setMutedState(!muted);
+    if (muted) sfx.tick();
+  };
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -53,11 +61,17 @@ export function App() {
     window.scrollTo({ top: 0 });
   };
 
-  const start = (modeId: string) => go({ name: 'quiz', modeId, round: buildRound(modeId, chapters), run: Date.now() });
+  const start = (modeId: string) => {
+    void sfx.start();
+    go({ name: 'quiz', modeId, round: buildRound(modeId, chapters), run: Date.now() });
+  };
 
   const finish = (modeId: string, records: AnswerRecord[], points: number) => {
     const correct = records.filter((r) => r.ok).length;
     const result = { correct, points, medal: medalFor(correct, records.length) };
+    // A bugle charge for a medal, a quieter call otherwise.
+    if (result.medal) void sfx.medal();
+    else sfx.finish();
     const isNewBest = isBetter(result, progress[modeId]);
     setProgress(saveResult(progress, modeId, result));
     go({ name: 'results', modeId, records, points, isNewBest });
@@ -76,12 +90,24 @@ export function App() {
             <FlagMark />
             <span className="brand__name">{strings.appName[lang]}</span>
           </button>
-          <div className="lang" role="group" aria-label="Language">
-            {(['en', 'el'] as const).map((l) => (
-              <button key={l} type="button" className={l === lang ? 'lang__btn lang__btn--on' : 'lang__btn'} onClick={() => setLangState(l)} aria-pressed={l === lang}>
-                {l === 'en' ? 'EN' : 'ΕΛ'}
-              </button>
-            ))}
+          <div className="topbar__tools">
+            <button
+              type="button"
+              className="sound-btn"
+              onClick={toggleSound}
+              aria-pressed={!muted}
+              aria-label={muted ? strings.soundOff[lang] : strings.soundOn[lang]}
+              title={muted ? strings.soundOff[lang] : strings.soundOn[lang]}
+            >
+              <SoundIcon muted={muted} />
+            </button>
+            <div className="lang" role="group" aria-label="Language">
+              {(['en', 'el'] as const).map((l) => (
+                <button key={l} type="button" className={l === lang ? 'lang__btn lang__btn--on' : 'lang__btn'} onClick={() => setLangState(l)} aria-pressed={l === lang}>
+                  {l === 'en' ? 'EN' : 'ΕΛ'}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </header>

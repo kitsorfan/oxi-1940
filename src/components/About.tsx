@@ -1,4 +1,5 @@
 import { images, type ImageInfo, type ImageSlug } from '../data/images';
+import { sounds } from '../data/sounds';
 import { useLang } from '../i18n/LangContext';
 import { AUTHOR_URL, REPO_URL } from '../i18n/strings';
 import { commonsUrl, imageUrl } from './Figure';
@@ -19,6 +20,25 @@ export function About({ onBack }: { onBack: () => void }) {
           {s('madeBy')} Kitsos Orfanopoulos (<a href={AUTHOR_URL}>www.kitsorfan.com</a>) ·{' '}
           <a href={REPO_URL}>{s('sourceCode')}</a>
         </p>
+      </section>
+      <section className="card">
+        <h2>{s('soundCredits')}</h2>
+        <ul className="credits credits--sounds">
+          {sounds.map((sound) => (
+            <li key={sound.name} className="credit">
+              <span className="credit__text">
+                <span className="credit__caption">{pick(sound.title)}</span>
+                <span className="credit__meta">
+                  {sound.author} · {sound.license} ·{' '}
+                  <a href={commonsUrl(sound.file)} target="_blank" rel="noreferrer">
+                    Wikimedia Commons
+                  </a>
+                </span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="credit__meta">{s('soundSynth')}</p>
       </section>
       <section className="card">
         <h2>{s('imageCredits')}</h2>

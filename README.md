@@ -23,6 +23,7 @@ On 28 October 1940 Greece answered Mussolini’s ultimatum with a single word: *
 - **Find-it-on-the-map** questions: tap the relief map of Greece and see how many kilometres you were off.
 - **One 50:50 lifeline per game.** It removes two wrong answers, or on map questions shades the half of the map without the target.
 - **Medals for 18, 19 and 20 out of 20**, and a downloadable **certificate of honour** to share on LinkedIn.
+- **Bugle calls and sound effects.** A real *Attention* call opens every game, *Charge* greets a medal, and a bugle flourish rewards every streak of three. One tap mutes it all.
 - **Share anywhere**: WhatsApp, Viber, Messenger, Telegram, Facebook, LinkedIn, X or email, or the phone’s own share sheet, which attaches your certificate.
 - **English and Greek** throughout, switchable at any moment.
 - **Made for phones first.** It works on any screen, keeps your best scores on your device and needs no account.
@@ -77,10 +78,12 @@ src/
 │   ├── engine.ts        # rounds, 50:50, scoring and medals (pure, unit-tested)
 │   ├── geo.ts           # map projection and distances
 │   ├── certificate.ts   # draws the certificate on a canvas
+│   ├── sound.ts         # bugle calls and synthesised sound effects
 │   └── share.ts         # share links for each app
 ├── components/          # Home, Quiz, MapPicker, Results, ShareMenu, About …
 └── i18n/strings.ts      # interface text in both languages
 public/img/              # images from Wikimedia Commons, resized to WebP
+public/sounds/           # two public-domain bugle calls
 test/                    # data integrity and game-rule tests
 ```
 
@@ -106,7 +109,7 @@ The questions are based on well-documented facts about the period. Where a story
 
 All photos and maps come from [Wikimedia Commons](https://commons.wikimedia.org/) and are in the public domain or under free licences (CC0, CC BY, CC BY-SA). They were resized and converted to WebP for the web. The author, licence and source page of each image are listed in [`src/data/images.ts`](src/data/images.ts) and on the **About & credits** page of the game. The base map is Wikipedia’s *Greece relief location map* by Lencer and Uwe Dedering (CC BY-SA 3.0).
 
-Share buttons use brand icons from [Simple Icons](https://simpleicons.org/) (CC0).
+The two bugle calls are public-domain recordings of the US armed forces from Wikimedia Commons: [*Attention*](https://commons.wikimedia.org/wiki/File:Attention_(United_States_Marine_Band_version).ogg) by the United States Marine Band and [*Charge*](https://commons.wikimedia.org/wiki/File:Charge_-_Concert_Band_-_United_States_Air_Force_Heritage_of_America_Band.mp3) by the United States Air Force Heritage of America Band, trimmed and converted to WAV. All other sounds are synthesised in the browser. Share buttons use brand icons from [Simple Icons](https://simpleicons.org/) (CC0).
 
 ## Ελληνικά
 
