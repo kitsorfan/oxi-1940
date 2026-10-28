@@ -18,6 +18,8 @@
 
 On 28 October 1940 Greece answered Mussolini’s ultimatum with a single word: **«ΟΧΙ» (“No”)**. This small game is a tribute to that day and to what followed. It covers the winter war in the mountains of Epirus and Albania, the German invasion, the Battle of Crete, the occupation, the Resistance and the liberation.
 
+- **A welcome screen** on the first visit explains the questions, helps, maps and medals in four lines.
+- **The 1940 broadcast.** A wireless set in the top bar plays the archive recording of the General Headquarters’ first communiqué of 28 October 1940, with an on-air ticker showing each sentence as it is read. It tunes in by itself on a first visit and replays at a tap.
 - **100 questions** in five chronological chapters of 20, plus a *Grand Challenge* that draws 20 at random from all of them.
 - **Real photos and maps** from Wikimedia Commons, with the story behind every answer.
 - **Find-it-on-the-map** questions: tap the relief map of Greece and see how many kilometres you were off.
@@ -29,18 +31,18 @@ On 28 October 1940 Greece answered Mussolini’s ultimatum with a single word: *
 - **Medals for 18, 19 and 20 out of 20**, and a downloadable **certificate of honour** to share on LinkedIn.
 - **Bugle calls and sound effects.** A real *Attention* call opens every game, *Charge* greets a medal, and a bugle flourish rewards every streak of three. One tap mutes it all.
 - **Share anywhere**: WhatsApp, Viber, Messenger, Telegram, Facebook, LinkedIn, X or email, or the phone’s own share sheet, which attaches your certificate.
-- **English and Greek** throughout, switchable at any moment.
+- **English and Greek** throughout, switchable at any moment. Greek is picked for you when any of your browser’s languages is Greek or your clock is set to Greece or Cyprus.
 - **Made for phones first.** It works on any screen, keeps your best scores on your device and needs no account.
 
 ## The chapters
 
 | # | Chapter | Period | Highlights |
 | --- | --- | --- | --- |
-| 1 | The Road to OXI | 1923 – 28 Oct 1940 | Corfu 1923, the torpedoing of *Elli*, the night of the ultimatum, Ochi Day today |
-| 2 | Pindus & the Counter-attack | Oct – Dec 1940 | Davakis and the Julia Division, Kalpaki, the women of the Pindus, Sofia Vembo, Korytsa |
-| 3 | The Winter Front | Nov 1940 – Apr 1941 | Mitralexis, the submarine *Papanikolis*, frostbite, Klisura, Elytis, the Spring Offensive |
-| 4 | Invasion & Crete | Apr – Jun 1941 | Operation Marita, Fort Rupel, Thermopylae, *Averof*, the Battle of Crete |
-| 5 | Occupation & Liberation | 1941 – 1945 | Glezos and Santas, the famine, Gorgopotamos, the Holocaust in Thessaloniki, Rimini, liberation |
+| 1 | The Road to OXI · *Ο δρόμος προς το ΟΧΙ* | 1923 – 28 Oct 1940 | Corfu 1923, the torpedoing of *Elli*, the night of the ultimatum, Ochi Day today |
+| 2 | Pindus & the Counter-attack · *Πίνδος και αντεπίθεση* | Oct – Dec 1940 | Davakis and the Julia Division, Kalpaki, the women of the Pindus, Sofia Vembo, Korytsa |
+| 3 | The Winter Front · *Το αλβανικό μέτωπο* | Nov 1940 – Apr 1941 | Mitralexis, the submarine *Papanikolis*, frostbite, Klisura, Elytis, the Spring Offensive |
+| 4 | Invasion & Crete · *Εισβολή και Κρήτη* | Apr – Jun 1941 | Operation Marita, Fort Rupel, Thermopylae, *Averof*, the Battle of Crete |
+| 5 | Occupation & Liberation · *Κατοχή και Απελευθέρωση* | 1941 – 1945 | Glezos and Santas, the famine, Palamas’ funeral, Gorgopotamos, the Holocaust in Thessaloniki, Rimini, liberation |
 
 ## Prizes
 
@@ -77,18 +79,20 @@ React 19, TypeScript and Vite. There is no backend and no tracking: progress liv
 src/
 ├── data/
 │   ├── chapters/        # the 100 questions, one file per chapter (English + Greek)
-│   └── images.ts        # every photo and map: file, author, licence, captions
+│   ├── images.ts        # every photo and map: file, author, licence, captions
+│   └── sounds.ts        # every recording: author, licence, source
 ├── game/
 │   ├── engine.ts        # rounds, helps, scoring and medals (pure, unit-tested)
 │   ├── geo.ts           # map projection, distances and compass directions
 │   ├── certificate.ts   # draws the certificate on a canvas
+│   ├── radio.ts         # the 1940 communiqué, line by line, with its timings
 │   ├── sound.ts         # bugle calls and synthesised sound effects
 │   └── share.ts         # share links for each app
-├── components/          # Home, Quiz, MapPicker, Results, ShareMenu, About …
-└── i18n/strings.ts      # interface text in both languages
+├── components/          # Welcome, NavRadio, Home, Quiz, MapPicker, Results, ShareMenu, About …
+└── i18n/strings.ts      # interface text in both languages and language detection
 public/img/              # images from Wikimedia Commons, resized to WebP
 public/sounds/           # the 1940 radio communiqué and two bugle calls, all public domain
-test/                    # data integrity and game-rule tests
+test/                    # data integrity, game rules, language detection and share links
 ```
 
 ### Adding a question
@@ -113,7 +117,7 @@ The questions are based on well-documented facts about the period. Where a story
 
 All photos and maps come from [Wikimedia Commons](https://commons.wikimedia.org/) and are in the public domain or under free licences (CC0, CC BY, CC BY-SA). They were resized and converted to WebP for the web. The author, licence and source page of each image are listed in [`src/data/images.ts`](src/data/images.ts) and on the **About & credits** page of the game. The base map is Wikipedia’s *Greece relief location map* by Lencer and Uwe Dedering (CC BY-SA 3.0).
 
-The welcome screen plays the archive radio recording of the first communiqué of the General Headquarters on 28 October 1940 (public domain), taken from [a copy on YouTube](https://www.youtube.com/watch?v=RnAPb6-UEFY). The two bugle calls are public-domain recordings of the US armed forces from Wikimedia Commons: [*Attention*](https://commons.wikimedia.org/wiki/File:Attention_(United_States_Marine_Band_version).ogg) by the United States Marine Band and [*Charge*](https://commons.wikimedia.org/wiki/File:Charge_-_Concert_Band_-_United_States_Air_Force_Heritage_of_America_Band.mp3) by the United States Air Force Heritage of America Band, trimmed and converted to WAV. All other sounds are synthesised in the browser. Share buttons use brand icons from [Simple Icons](https://simpleicons.org/) (CC0).
+The radio in the top bar plays the archive recording of the first communiqué of the General Headquarters on 28 October 1940 (public domain), taken from [a copy on YouTube](https://www.youtube.com/watch?v=RnAPb6-UEFY). The two bugle calls are public-domain recordings of the US armed forces from Wikimedia Commons: [*Attention*](https://commons.wikimedia.org/wiki/File:Attention_(United_States_Marine_Band_version).ogg) by the United States Marine Band and [*Charge*](https://commons.wikimedia.org/wiki/File:Charge_-_Concert_Band_-_United_States_Air_Force_Heritage_of_America_Band.mp3) by the United States Air Force Heritage of America Band, trimmed and converted to WAV. All other sounds are synthesised in the browser. Share buttons use brand icons from [Simple Icons](https://simpleicons.org/) (CC0).
 
 ## Ελληνικά
 
