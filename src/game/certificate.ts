@@ -27,25 +27,10 @@ const MEDAL_KEYS = {
   bronze: ['medalBronze', 'rankBronze'],
 } as const;
 
-/** One module of a Greek key (meander) band, 10×10 units. */
-function meander(ctx: CanvasRenderingContext2D, x: number, y: number, u: number) {
-  const p = (dx: number, dy: number) => [x + dx * u, y + dy * u] as const;
-  const pts = [p(0, 10), p(0, 0), p(8, 0), p(8, 6), p(4, 6), p(4, 4), p(6, 4), p(6, 2), p(2, 2), p(2, 10), p(10, 10)];
-  ctx.moveTo(...pts[0]!);
-  for (const pt of pts.slice(1)) ctx.lineTo(...pt);
-}
-
-function meanderBand(ctx: CanvasRenderingContext2D, y: number) {
-  const u = 2.6;
-  const size = 10 * u;
-  const count = Math.floor((W - 240) / size);
-  const start = (W - count * size) / 2;
-  ctx.beginPath();
-  for (let i = 0; i < count; i++) meander(ctx, start + i * size, y, u);
-  ctx.strokeStyle = BLUE;
-  ctx.lineWidth = 3;
-  ctx.lineJoin = 'miter';
-  ctx.stroke();
+/** Three thin blue stripes, like those of the flag. */
+function stripeBand(ctx: CanvasRenderingContext2D, y: number) {
+  ctx.fillStyle = BLUE;
+  for (let i = 0; i < 3; i++) ctx.fillRect(120, y + i * 10, W - 240, 4);
 }
 
 function drawMedal(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number, medal: Medal, label: string) {
@@ -121,8 +106,8 @@ export async function renderCertificate(d: CertificateData): Promise<Blob> {
   ctx.strokeRect(40, 40, W - 80, H - 80);
   ctx.lineWidth = 2;
   ctx.strokeRect(66, 66, W - 132, H - 132);
-  meanderBand(ctx, 92);
-  meanderBand(ctx, H - 92 - 26);
+  stripeBand(ctx, 96);
+  stripeBand(ctx, H - 96 - 24);
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
