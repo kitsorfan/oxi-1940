@@ -2,6 +2,7 @@ import type { L, Lang } from '../types';
 
 export const SITE_URL = 'https://kitsorfan.github.io/oxi-1940/';
 export const REPO_URL = 'https://github.com/kitsorfan/oxi-1940';
+export const AUTHOR_URL = 'https://www.kitsorfan.com';
 
 const t = (en: string, el: string): L => ({ en, el });
 

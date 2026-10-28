@@ -1,6 +1,6 @@
 import { images, type ImageInfo, type ImageSlug } from '../data/images';
 import { useLang } from '../i18n/LangContext';
-import { REPO_URL } from '../i18n/strings';
+import { AUTHOR_URL, REPO_URL } from '../i18n/strings';
 import { commonsUrl, imageUrl } from './Figure';
 import { BackIcon } from './Icons';
 
@@ -16,7 +16,7 @@ export function About({ onBack }: { onBack: () => void }) {
         <h1>{s('aboutTitle')}</h1>
         <p>{s('aboutText')}</p>
         <p>
-          {s('madeBy')} <a href="https://github.com/kitsorfan">Kitsos Orfanopoulos</a> ·{' '}
+          {s('madeBy')} Kitsos Orfanopoulos (<a href={AUTHOR_URL}>www.kitsorfan.com</a>) ·{' '}
           <a href={REPO_URL}>{s('sourceCode')}</a>
         </p>
       </section>

@@ -8,7 +8,7 @@ import { chapters } from './data/chapters';
 import { buildRound, medalFor, type RoundItem } from './game/engine';
 import { isBetter, loadProgress, saveResult, type Progress } from './game/progress';
 import { LangContext, makeLangValue } from './i18n/LangContext';
-import { detectLang, strings } from './i18n/strings';
+import { AUTHOR_URL, detectLang, strings } from './i18n/strings';
 import type { L, Lang } from './types';
 
 type Screen =
@@ -119,7 +119,7 @@ export function App() {
             </button>
           </p>
           <p>
-            {strings.madeBy[lang]} <a href="https://github.com/kitsorfan">Kitsos Orfanopoulos</a> · 28.10.{new Date().getFullYear()}
+            {strings.madeBy[lang]} Kitsos Orfanopoulos (<a href={AUTHOR_URL}>www.kitsorfan.com</a>) · 28.10.{new Date().getFullYear()}
           </p>
         </footer>
       )}
