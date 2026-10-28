@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { renderCertificate } from '../game/certificate';
 import { medalFor, type Medal } from '../game/engine';
+import { shareLinks } from '../game/share';
 import { useLang } from '../i18n/LangContext';
 import { SITE_URL, fill } from '../i18n/strings';
 import type { L } from '../types';
 import { Confetti } from './Confetti';
-import { ArrowIcon, CheckIcon, CrossIcon, DownloadIcon, LinkedInIcon, ShareIcon } from './Icons';
+import { ArrowIcon, CheckIcon, CrossIcon, DownloadIcon, LinkedInIcon } from './Icons';
 import { MedalBadge } from './MedalBadge';
 import type { AnswerRecord } from './Quiz';
+import { ShareMenu } from './ShareMenu';
 
 interface Props {
   title: L;
@@ -37,7 +39,6 @@ export function Results({ title, records, points, isNewBest, onReplay, onHome }:
   const { lang, pick, s } = useLang();
   const [name, setName] = useState(savedName);
   const [busy, setBusy] = useState(false);
-  const [toast, setToast] = useState('');
   const total = records.length;
   const correct = records.filter((r) => r.ok).length;
   const medal = medalFor(correct, total);
@@ -51,11 +52,6 @@ export function Results({ title, records, points, isNewBest, onReplay, onHome }:
     total,
     medal: medal ? ` (${s(MEDAL_TEXT[medal][0])})` : '',
   });
-
-  const flash = (text: string) => {
-    setToast(text);
-    window.setTimeout(() => setToast(''), 2200);
-  };
 
   const certificate = async () => {
     if (!medal) return null;
@@ -84,26 +80,7 @@ export function Results({ title, records, points, isNewBest, onReplay, onHome }:
     }
   };
 
-  const share = async () => {
-    setBusy(true);
-    try {
-      const file = medal && name.trim() ? await certificate() : null;
-      const data: ShareData = { title: s('appName'), text: `${shareText} ${SITE_URL}` };
-      if (file && navigator.canShare?.({ files: [file] })) data.files = [file];
-      if (navigator.share) {
-        await navigator.share(data);
-      } else {
-        await navigator.clipboard.writeText(`${shareText} ${SITE_URL}`);
-        flash(s('copied'));
-      }
-    } catch {
-      // The user closed the share sheet.
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const linkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE_URL)}`;
+  const linkedIn = shareLinks(shareText, SITE_URL, s('appName')).linkedin;
 
   return (
     <div className="results">
@@ -150,18 +127,11 @@ export function Results({ title, records, points, isNewBest, onReplay, onHome }:
         )}
 
         <div className="results__share">
-          <button type="button" className="btn btn--ghost" onClick={share} disabled={busy}>
-            <ShareIcon /> {s('share')}
-          </button>
+          <ShareMenu text={shareText} getFile={medal && name.trim() ? certificate : undefined} />
           <a className="btn btn--linkedin" href={linkedIn} target="_blank" rel="noreferrer">
             <LinkedInIcon /> {s('shareLinkedIn')}
           </a>
         </div>
-        {toast && (
-          <p className="toast" role="status">
-            {toast}
-          </p>
-        )}
 
         <div className="results__actions">
           <button type="button" className="btn btn--primary" onClick={onReplay}>

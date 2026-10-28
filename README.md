@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/code-MIT-0d5eaf.svg)](LICENSE)
 ![English · Ελληνικά](https://img.shields.io/badge/lang-EN%20%C2%B7%20%CE%95%CE%9B-0b2545.svg)
 
-### [▶ Play now: kitsorfan.github.io/oxi-1940](https://kitsorfan.github.io/oxi-1940/)
+**[▶ Play now: kitsorfan.github.io/oxi-1940](https://kitsorfan.github.io/oxi-1940/)**
 
 <img src="docs/screenshots/phones.jpg" alt="The quiz on a phone: home screen, a photo question with the 50:50 lifeline, a map question in Greek and the gold medal screen" width="100%">
 
@@ -23,13 +23,14 @@ On 28 October 1940 Greece answered Mussolini’s ultimatum with a single word: *
 - **Find-it-on-the-map** questions: tap the relief map of Greece and see how many kilometres you were off.
 - **One 50:50 lifeline per game.** It removes two wrong answers, or on map questions shades the half of the map without the target.
 - **Medals for 18, 19 and 20 out of 20**, and a downloadable **certificate of honour** to share on LinkedIn.
+- **Share anywhere**: WhatsApp, Viber, Messenger, Telegram, Facebook, LinkedIn, X or email, or the phone’s own share sheet, which attaches your certificate.
 - **English and Greek** throughout, switchable at any moment.
 - **Made for phones first.** It works on any screen, keeps your best scores on your device and needs no account.
 
 ## The chapters
 
 | # | Chapter | Period | Highlights |
-|---|---------|--------|------------|
+| --- | --- | --- | --- |
 | 1 | The Road to OXI | 1923 – 28 Oct 1940 | Corfu 1923, the torpedoing of *Elli*, the night of the ultimatum, Ochi Day today |
 | 2 | Pindus & the Counter-attack | Oct – Dec 1940 | Davakis and the Julia Division, Kalpaki, the women of the Pindus, Sofia Vembo, Korytsa |
 | 3 | The Winter Front | Nov 1940 – Apr 1941 | Mitralexis, the submarine *Papanikolis*, frostbite, Klisura, Elytis, the Spring Offensive |
@@ -39,7 +40,7 @@ On 28 October 1940 Greece answered Mussolini’s ultimatum with a single word: *
 ## Prizes
 
 | Score | Medal | Title |
-|-------|-------|-------|
+| --- | --- | --- |
 | 20 / 20 | 🥇 Gold | Hero of ’40 · *Ήρωας του ’40* |
 | 19 / 20 | 🥈 Silver | Guardian of the Pindus · *Φρουρός της Πίνδου* |
 | 18 / 20 | 🥉 Bronze | Defender of Epirus · *Υπερασπιστής της Ηπείρου* |
@@ -67,7 +68,7 @@ Every push to `main` is type-checked, tested, built and published to GitHub Page
 
 React 19, TypeScript and Vite. There is no backend and no tracking: progress lives in `localStorage`.
 
-```
+```text
 src/
 ├── data/
 │   ├── chapters/        # the 100 questions, one file per chapter (English + Greek)
@@ -75,8 +76,9 @@ src/
 ├── game/
 │   ├── engine.ts        # rounds, 50:50, scoring and medals (pure, unit-tested)
 │   ├── geo.ts           # map projection and distances
-│   └── certificate.ts   # draws the certificate on a canvas
-├── components/          # Home, Quiz, MapPicker, Results, About …
+│   ├── certificate.ts   # draws the certificate on a canvas
+│   └── share.ts         # share links for each app
+├── components/          # Home, Quiz, MapPicker, Results, ShareMenu, About …
 └── i18n/strings.ts      # interface text in both languages
 public/img/              # images from Wikimedia Commons, resized to WebP
 test/                    # data integrity and game-rule tests
@@ -103,6 +105,8 @@ Map questions use `map({ … lat, lon, radiusKm })`. The tests check that every 
 The questions are based on well-documented facts about the period. Where a story is uncertain, such as the famous phrase attributed to Churchill, the question says so.
 
 All photos and maps come from [Wikimedia Commons](https://commons.wikimedia.org/) and are in the public domain or under free licences (CC0, CC BY, CC BY-SA). They were resized and converted to WebP for the web. The author, licence and source page of each image are listed in [`src/data/images.ts`](src/data/images.ts) and on the **About & credits** page of the game. The base map is Wikipedia’s *Greece relief location map* by Lencer and Uwe Dedering (CC BY-SA 3.0).
+
+Share buttons use brand icons from [Simple Icons](https://simpleicons.org/) (CC0).
 
 ## Ελληνικά
 

@@ -403,10 +403,139 @@ h3 {
 
 .hero__cta {
   margin-top: 24px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 12px;
 }
 
 .hero__cta .btn {
   width: 100%;
+}
+
+.btn--outline-light {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+
+.btn--outline-light:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ---------- Share sheet ---------- */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(8, 18, 33, 0.55);
+  animation: fade 0.2s ease both;
+}
+
+.sheet__panel {
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 18px var(--gutter) calc(20px + env(safe-area-inset-bottom));
+  background: var(--card);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25);
+  color: var(--ink);
+  text-align: left;
+  animation: slide-up 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+.sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sheet__head h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.sheet__preview {
+  margin: 10px 0 16px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.sheet__preview span {
+  display: block;
+  margin-top: 2px;
+  color: var(--blue);
+  overflow-wrap: anywhere;
+}
+
+.sheet__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px 6px;
+}
+
+.sheet__app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink);
+  font-family: var(--head);
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.sheet__icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(11, 37, 69, 0.18);
+  transition: transform 0.12s ease;
+}
+
+.sheet__app:hover .sheet__icon,
+.sheet__app:focus-visible .sheet__icon {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.sheet__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.sheet__actions .btn {
+  font-size: 16px;
+  padding: 8px 12px;
+  line-height: 1.15;
+}
+
+.sheet__actions .btn:only-child {
+  grid-column: 1 / -1;
+}
+
+.sheet__note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
 }
 
 /* ---------- Medal cabinet ---------- */
@@ -1486,6 +1615,13 @@ h3 {
   }
 }
 
+@keyframes slide-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
 @keyframes confetti {
   to {
     transform: translate(var(--drift), 110vh) rotate(var(--spin));
@@ -1525,8 +1661,24 @@ h3 {
     max-width: none;
   }
 
+  .hero__cta {
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
   .hero__cta .btn {
     width: auto;
+  }
+
+  .sheet {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .sheet__panel {
+    border-radius: 22px;
+    padding: 22px 24px 24px;
   }
 
   .chapters {

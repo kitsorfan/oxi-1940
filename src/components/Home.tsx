@@ -5,6 +5,7 @@ import { useLang } from '../i18n/LangContext';
 import { imageUrl } from './Figure';
 import { ArrowIcon, PinIcon, SplitIcon, StarIcon } from './Icons';
 import { MedalBadge } from './MedalBadge';
+import { ShareMenu } from './ShareMenu';
 
 interface Props {
   progress: Progress;
@@ -46,6 +47,7 @@ export function Home({ progress, onPlay }: Props) {
             </li>
           </ul>
           <div className="hero__cta">
+            <ShareMenu text={s('shareInvite')} className="btn btn--outline-light btn--lg" label={s('shareGame')} />
             <button type="button" className="btn btn--gold btn--lg" onClick={() => onPlay(MIXED_ID)}>
               {s('heroTitle')} <ArrowIcon />
             </button>

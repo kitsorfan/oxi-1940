@@ -70,6 +70,19 @@ export const strings = {
   certDownload: t('Download certificate', 'Λήψη διπλώματος'),
   share: t('Share', 'Κοινοποίηση'),
   shareLinkedIn: t('Share on LinkedIn', 'Κοινοποίηση στο LinkedIn'),
+  shareTitle: t('Share with friends', 'Μοιράσου το με φίλους'),
+  shareGame: t('Share the game', 'Μοιράσου το παιχνίδι'),
+  shareInvite: t(
+    'How well do you know the Epic of ’40? Try the OXI 1940 history quiz: 100 questions with real photos and maps, in English and Greek.',
+    'Πόσο καλά ξέρεις το Έπος του ’40; Δοκίμασε το κουίζ ιστορίας «ΟΧΙ 1940»: 100 ερωτήσεις με αληθινές φωτογραφίες και χάρτες.',
+  ),
+  copyLink: t('Copy link', 'Αντιγραφή συνδέσμου'),
+  moreApps: t('More apps', 'Άλλες εφαρμογές'),
+  shareCertNote: t(
+    'With “More apps” on your phone, your certificate is attached too.',
+    'Με τις «Άλλες εφαρμογές» στο κινητό, επισυνάπτεται και το δίπλωμά σου.',
+  ),
+  close: t('Close', 'Κλείσιμο'),
   copied: t('Copied to clipboard!', 'Αντιγράφηκε!'),
   shareText: t(
     'I scored {n}/{total} in the OXI 1940 history quiz{medal}. How well do you know the Epic of ’40?',
