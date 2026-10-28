@@ -21,8 +21,8 @@ export const sounds: SoundInfo[] = [
   {
     name: 'communique-1940.m4a',
     title: {
-      en: 'Communiqué of the General Headquarters, 28 October 1940, on the welcome screen',
-      el: 'Ανακοινωθέν του Γενικού Στρατηγείου, 28 Οκτωβρίου 1940, στην οθόνη υποδοχής',
+      en: 'Communiqué of the General Headquarters, 28 October 1940, played by the radio in the top bar',
+      el: 'Ανακοινωθέν του Γενικού Στρατηγείου, 28 Οκτωβρίου 1940, από το ραδιόφωνο στην πάνω μπάρα',
     },
     author: 'Greek public radio, 1940',
     license: 'Public domain',
