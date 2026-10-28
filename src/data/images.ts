@@ -1,0 +1,625 @@
+// Photos and maps from Wikimedia Commons, resized and converted to WebP.
+// Source page of each image: https://commons.wikimedia.org/wiki/File:<file>
+import type { L } from '../types';
+
+export interface ImageInfo {
+  file: string;
+  width: number;
+  height: number;
+  author: string;
+  license: string;
+  licenseUrl?: string;
+  caption: L;
+}
+
+export const images = {
+  'metaxas': {
+    file: 'Ioannis Metaxas 1937 cropped.jpg',
+    width: 960,
+    height: 1201,
+    author: 'Archaeological Society at Athens',
+    license: 'Public domain',
+    caption: {
+      en: 'Ioannis Metaxas, Prime Minister of Greece, 1937',
+      el: 'Ο Ιωάννης Μεταξάς, πρωθυπουργός της Ελλάδας, 1937',
+    },
+  },
+  'elli': {
+    file: 'Cruiser Elli.jpg',
+    width: 765,
+    height: 519,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'The Greek cruiser Elli',
+      el: 'Το ελληνικό καταδρομικό «Έλλη»',
+    },
+  },
+  'mussolini': {
+    file: 'Mussolini mezzobusto.jpg',
+    width: 958,
+    height: 1297,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Benito Mussolini, dictator of Italy',
+      el: 'Ο Μπενίτο Μουσολίνι, δικτάτορας της Ιταλίας',
+    },
+  },
+  'ciano': {
+    file: 'Galeazzo Ciano01.jpg',
+    width: 455,
+    height: 494,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Count Galeazzo Ciano at his desk in Rome, 1937',
+      el: 'Ο κόμης Γκαλεάτσο Τσιάνο στο γραφείο του στη Ρώμη, 1937',
+    },
+  },
+  'newspaper': {
+    file: 'Ellinikon Mellon 30 October 1940.jpg',
+    width: 852,
+    height: 610,
+    author: 'Nikos P Efstratiou',
+    license: 'Public domain',
+    caption: {
+      en: 'Front page of the newspaper Ellinikon Mellon, 30 October 1940',
+      el: 'Το πρωτοσέλιδο της εφημερίδας «Ελληνικόν Μέλλον», 30 Οκτωβρίου 1940',
+    },
+  },
+  'kalpaki-soldier': {
+    file: 'Greek soldier Kalpaki 1940.jpg',
+    width: 700,
+    height: 496,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'A Greek soldier on a captured Italian CV-33 tankette, Elaia–Kalamas, November 1940',
+      el: 'Έλληνας στρατιώτης πάνω σε αιχμάλωτο ιταλικό τανκς CV-33, Ελαία–Καλαμάς, Νοέμβριος 1940',
+    },
+  },
+  'pindus-map': {
+    file: 'Pindus map.JPG',
+    width: 416,
+    height: 377,
+    author: 'NASA',
+    license: 'Public domain',
+    caption: {
+      en: 'The Pindus mountain range, seen from space',
+      el: 'Η οροσειρά της Πίνδου από το διάστημα',
+    },
+  },
+  'invasion-map-en': {
+    file: 'Italian Invasion 1940 in Pindus Epirus.svg',
+    width: 1280,
+    height: 985,
+    author: 'Alexikoua',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    caption: {
+      en: 'The failed Italian invasion of Greece, October–November 1940',
+      el: 'Η αποτυχημένη ιταλική εισβολή στην Ελλάδα, Οκτώβριος–Νοέμβριος 1940',
+    },
+  },
+  'invasion-map-el': {
+    file: 'Italian Invasion 1940 in Pindus Epirus el.svg',
+    width: 1280,
+    height: 985,
+    author: 'Alexikoua',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    caption: {
+      en: 'The failed Italian invasion of Greece, October–November 1940',
+      el: 'Η αποτυχημένη ιταλική εισβολή στην Ελλάδα, Οκτώβριος–Νοέμβριος 1940',
+    },
+  },
+  'morava-artillery': {
+    file: 'Greek artilery Morava Nov 1940.JPG',
+    width: 960,
+    height: 541,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Greek artillery firing on the Morava heights, November 1940',
+      el: 'Ελληνικό πυροβολικό βάλλει στα υψώματα της Μόραβας, Νοέμβριος 1940',
+    },
+  },
+  'korce': {
+    file: 'Greek Forces in Korce.JPG',
+    width: 475,
+    height: 726,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Greek troops marching through Korytsa (Korçë), November 1940',
+      el: 'Ελληνικά στρατεύματα βαδίζουν στους δρόμους της Κορυτσάς, Νοέμβριος 1940',
+    },
+  },
+  'klisura-tank': {
+    file: 'Kleisoura.Italiko.tank.jpg',
+    width: 800,
+    height: 626,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'After the capture of the Klisura Pass, 10 January 1941',
+      el: 'Μετά την κατάληψη της Κλεισούρας, 10 Ιανουαρίου 1941',
+    },
+  },
+  'soldier-mother': {
+    file: 'Στρατιώτης με τη μητέρα του πριν την αναχώρηση για το αλβανικό μέτωπο.jpg',
+    width: 960,
+    height: 1004,
+    author: 'Hellenic Ministry of Foreign Affairs',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    caption: {
+      en: 'A Greek soldier with his mother before leaving for the Albanian front',
+      el: 'Στρατιώτης με τη μητέρα του πριν φύγει για το αλβανικό μέτωπο',
+    },
+  },
+  'italian-winter': {
+    file: 'Italian soldiers in winter 1940.jpg',
+    width: 960,
+    height: 660,
+    author: 'Jheeeeeeteegh',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0',
+    caption: {
+      en: 'Italian soldiers in the snow, winter 1940',
+      el: 'Ιταλοί στρατιώτες στο χιόνι, χειμώνας 1940',
+    },
+  },
+  'raf-blenheim': {
+    file: '211 Squadron RAF Blenheim Greece WWII IWM CM 288.jpg',
+    width: 960,
+    height: 736,
+    author: 'H. Hensser, Royal Air Force official photographer',
+    license: 'Public domain',
+    caption: {
+      en: 'An RAF Blenheim bomber of No. 211 Squadron at Tatoi (Menidi), Greece',
+      el: 'Βομβαρδιστικό Blenheim της 211ης Μοίρας της RAF στο Τατόι (Μενίδι)',
+    },
+  },
+  'mitralexis-diorama': {
+    file: 'Hellenic War Museum Diorama of Greek Pilot Cutting Tail Off Italian Bomber (28592971965).jpg',
+    width: 960,
+    height: 640,
+    author: 'Gary Todd',
+    license: 'CC0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/deed.en',
+    caption: {
+      en: 'Diorama at the War Museum of Athens: a Greek fighter cuts the tail of an Italian bomber',
+      el: 'Διόραμα στο Πολεμικό Μουσείο Αθηνών: ελληνικό καταδιωκτικό κόβει την ουρά ιταλικού βομβαρδιστικού',
+    },
+  },
+  'mussolini-spring': {
+    file: 'Benito Mussolini supervises the Italian Spring Offensive.jpg',
+    width: 667,
+    height: 992,
+    author: 'army.gr',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    caption: {
+      en: 'Mussolini watching the Italian Spring Offensive, March 1941',
+      el: 'Ο Μουσολίνι παρακολουθεί την ιταλική Εαρινή Επίθεση, Μάρτιος 1941',
+    },
+  },
+  'leaders-1941': {
+    file: 'GambierParryMetaxasJorgeIIDalbiacYPapagosEnero1941--128421.jpeg',
+    width: 450,
+    height: 259,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Anglo-Greek war council, January 1941 — from left: Gambier-Parry, Metaxas, King George II, D’Albiac and Papagos',
+      el: 'Αγγλοελληνικό πολεμικό συμβούλιο, Ιανουάριος 1941 — από αριστερά: Γκάμπιερ-Πάρι, Μεταξάς, βασιλιάς Γεώργιος Β΄, Ντ’ Άλμπιακ και Παπάγος',
+    },
+  },
+  'papagos': {
+    file: 'Alexandros Papagos as PM.jpg',
+    width: 733,
+    height: 1076,
+    author: 'Unknown photographer (Marshall Plan photo series)',
+    license: 'Public domain',
+    caption: {
+      en: 'Alexandros Papagos (photo from 1954)',
+      el: 'Ο Αλέξανδρος Παπάγος (φωτογραφία του 1954)',
+    },
+  },
+  'katsimitros': {
+    file: 'Charalambos Katsimitros.jpg',
+    width: 480,
+    height: 641,
+    author: 'Fertitler',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    caption: {
+      en: 'Major General Charalambos Katsimitros',
+      el: 'Ο υποστράτηγος Χαράλαμπος Κατσιμήτρος',
+    },
+  },
+  'koryzis': {
+    file: 'AlexandrosKoryzis--P02018.027.jpeg',
+    width: 199,
+    height: 337,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Alexandros Koryzis, Prime Minister in 1941',
+      el: 'Ο Αλέξανδρος Κορυζής, πρωθυπουργός το 1941',
+    },
+  },
+  'lottery': {
+    file: 'Λαχειοπώλης με αφίσα του Μεγάλου Πολεμικού Λαχείου, Νοέμβριος 1940.jpg',
+    width: 960,
+    height: 1009,
+    author: 'Hellenic Ministry of Foreign Affairs',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    caption: {
+      en: 'A lottery seller with a poster of the Great War Lottery, November 1940',
+      el: 'Λαχειοπώλης με αφίσα του Μεγάλου Πολεμικού Λαχείου, Νοέμβριος 1940',
+    },
+  },
+  'vembo': {
+    file: 'Sofia-vempo-general-state-archives.jpeg',
+    width: 960,
+    height: 767,
+    author: 'Greek State General Archives - Komotini',
+    license: 'CC BY 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/3.0',
+    caption: {
+      en: 'Sofia Vembo at a reception of the Royal Gendarmerie',
+      el: 'Η Σοφία Βέμπο σε δεξίωση της Βασιλικής Χωροφυλακής',
+    },
+  },
+  'marita-map': {
+    file: 'Battle of Greece WWII 1941 map-en.svg',
+    width: 1280,
+    height: 1732,
+    author: 'Eric Gaba (Sting)',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    caption: {
+      en: 'Map of the German invasion of Greece, April 1941',
+      el: 'Χάρτης της γερμανικής εισβολής στην Ελλάδα, Απρίλιος 1941',
+    },
+  },
+  'greece-9april-map': {
+    file: 'Battle of Greece - 9 April 1941.png',
+    width: 601,
+    height: 596,
+    author: 'Raymond Palmer',
+    license: 'Public domain',
+    caption: {
+      en: 'The German advance up to 9 April 1941',
+      el: 'Η γερμανική προέλαση έως τις 9 Απριλίου 1941',
+    },
+  },
+  'rupel-map': {
+    file: 'The Battles at the Forts of Rupel and Beles, 6–9 April 1941.jpg',
+    width: 1280,
+    height: 805,
+    author: 'Anaximandros79',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0',
+    caption: {
+      en: 'The battles at the forts of Rupel and Beles, 6–9 April 1941',
+      el: 'Οι μάχες στα οχυρά Ρούπελ και Μπέλες, 6–9 Απριλίου 1941',
+    },
+  },
+  'metaxas-line': {
+    file: 'Metaxas line 1941.jpg',
+    width: 960,
+    height: 689,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Anti-tank “dragon’s teeth” of the Metaxas Line, near the Bulgarian border',
+      el: 'Αντιαρματικά εμπόδια της Γραμμής Μεταξά κοντά στα σύνορα με τη Βουλγαρία',
+    },
+  },
+  'vevi': {
+    file: 'AWM 007647 vevi.jpg',
+    width: 500,
+    height: 367,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Australian anti-tank gunners resting after the fighting at Vevi, 13 April 1941',
+      el: 'Αυστραλοί πυροβολητές ξεκουράζονται μετά τη μάχη της Βεύης, 13 Απριλίου 1941',
+    },
+  },
+  'thermopylae': {
+    file: 'Thermopylae under German control, 1941.jpg',
+    width: 789,
+    height: 558,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Thermopylae under German control, 1941',
+      el: 'Οι Θερμοπύλες υπό γερμανικό έλεγχο, 1941',
+    },
+  },
+  'surrender': {
+    file: 'AnatoliaCollege-SurrenderofGreece.jpg',
+    width: 526,
+    height: 450,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'General Georgios Tsolakoglou arrives in Thessaloniki to sign the surrender, April 1941',
+      el: 'Ο στρατηγός Γεώργιος Τσολάκογλου φτάνει στη Θεσσαλονίκη για να υπογράψει τη συνθηκολόγηση, Απρίλιος 1941',
+    },
+  },
+  'acropolis-flag': {
+    file: 'Bundesarchiv Bild 101I-164-0389-23A, Athen, Hissen der Hakenkreuzflagge.jpg',
+    width: 559,
+    height: 795,
+    author: 'Bundesarchiv, Bild 101I-164-0389-23A / Theodor Scheerer',
+    license: 'CC BY-SA 3.0 de',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/de/deed.en',
+    caption: {
+      en: 'German soldiers raise the swastika flag on the Acropolis, 1941',
+      el: 'Γερμανοί στρατιώτες υψώνουν τη σημαία με τον αγκυλωτό σταυρό στην Ακρόπολη, 1941',
+    },
+  },
+  'crete-paratroopers': {
+    file: 'Bundesarchiv Bild 141-0864, Kreta, Landung von Fallschirmjägern.jpg',
+    width: 798,
+    height: 496,
+    author: 'Bundesarchiv, Bild 141-0864',
+    license: 'CC BY-SA 3.0 de',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/de/deed.en',
+    caption: {
+      en: 'German paratroopers landing on Crete, May 1941',
+      el: 'Γερμανοί αλεξιπτωτιστές πέφτουν στην Κρήτη, Μάιος 1941',
+    },
+  },
+  'maleme': {
+    file: 'Maleme airfield after the Battle of Crete.jpg',
+    width: 762,
+    height: 605,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Wrecked Junkers 52 transports at Maleme airfield, Crete',
+      el: 'Κατεστραμμένα μεταγωγικά Junkers 52 στο αεροδρόμιο του Μάλεμε, Κρήτη',
+    },
+  },
+  'freyberg': {
+    file: 'Lieutenant General Freyberg gazes over the parapet.jpg',
+    width: 960,
+    height: 625,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Lieutenant General Bernard Freyberg on Crete, May 1941',
+      el: 'Ο αντιστράτηγος Μπέρναρντ Φράιμπεργκ στην Κρήτη, Μάιος 1941',
+    },
+  },
+  'triple-occupation': {
+    file: 'Triple Occupation of Greece.png',
+    width: 899,
+    height: 917,
+    author: 'Cplakidas',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    caption: {
+      en: 'The triple occupation of Greece, 1941–1944',
+      el: 'Η τριπλή κατοχή της Ελλάδας, 1941–1944',
+    },
+  },
+  'glezos-stamp': {
+    file: '1959 CPA 2379.jpg',
+    width: 960,
+    height: 673,
+    author: 'Post of USSR',
+    license: 'Public domain',
+    caption: {
+      en: 'Soviet stamp of 1959 honouring Manolis Glezos',
+      el: 'Σοβιετικό γραμματόσημο του 1959 προς τιμήν του Μανώλη Γλέζου',
+    },
+  },
+  'elytis': {
+    file: 'Odysseas Elytis 1974.jpg',
+    width: 583,
+    height: 687,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Odysseas Elytis, 1974',
+      el: 'Ο Οδυσσέας Ελύτης, 1974',
+    },
+  },
+  'averof': {
+    file: 'Averof in camo,1942.jpg',
+    width: 759,
+    height: 502,
+    author: 'Royal Navy (UK Crown Copyright, expired)',
+    license: 'Public domain',
+    caption: {
+      en: 'The armoured cruiser Georgios Averof in camouflage paint, 1942',
+      el: 'Το θωρακισμένο καταδρομικό «Γεώργιος Αβέρωφ» με παραλλαγή, 1942',
+    },
+  },
+  'papanikolis': {
+    file: 'Painting the Guns on Board the Greek Submarine Papanicolis, 30 October To 7 November 1942, Beirut, Syria. A13738.jpg',
+    width: 609,
+    height: 800,
+    author: 'Coote, R G G (Lt)',
+    license: 'Public domain',
+    caption: {
+      en: 'Sailors painting the guns of the Greek submarine Papanikolis, 1942',
+      el: 'Ναύτες βάφουν τα πυροβόλα του ελληνικού υποβρυχίου «Παπανικολής», 1942',
+    },
+  },
+  'king-george': {
+    file: 'Georgeiiofgreece.jpg',
+    width: 960,
+    height: 1324,
+    author: 'United States Office of War Information, Overseas Picture Division, Washington Division.',
+    license: 'Public domain',
+    caption: {
+      en: 'King George II of Greece',
+      el: 'Ο βασιλιάς Γεώργιος Β΄ της Ελλάδας',
+    },
+  },
+  'ochi-rhodes': {
+    file: 'Ochi-tag rhodos 2011-1.jpg',
+    width: 960,
+    height: 686,
+    author: 'Chrischerf',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    caption: {
+      en: 'Ochi Day parade on Rhodes, 2011',
+      el: 'Παρέλαση για την 28η Οκτωβρίου στη Ρόδο, 2011',
+    },
+  },
+  'greece-relief': {
+    file: 'Greece relief location map.jpg',
+    width: 1003,
+    height: 825,
+    author: 'Lencer; relief by Uwe Dedering',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    caption: {
+      en: 'Relief map of Greece',
+      el: 'Ανάγλυφος χάρτης της Ελλάδας',
+    },
+  },
+  'karavias-davakis': {
+    file: 'KARAVIAS-DAVAKIS-1.jpg',
+    width: 270,
+    height: 272,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Major Ioannis Karavias (left) with Colonel Konstantinos Davakis, 1940',
+      el: 'Ο ταγματάρχης Ιωάννης Καραβίας (αριστερά) με τον συνταγματάρχη Κωνσταντίνο Δαβάκη, 1940',
+    },
+  },
+  'davakis-tunic': {
+    file: 'Το Χιτώνιο του Κωνσταντίνου Δαβάκη (εμπρόσθια όψη).jpg',
+    width: 960,
+    height: 1280,
+    author: 'Palioxora',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    caption: {
+      en: 'The uniform tunic of Colonel Konstantinos Davakis',
+      el: 'Το χιτώνιο του συνταγματάρχη Κωνσταντίνου Δαβάκη',
+    },
+  },
+  'liberation-athens': {
+    file: 'Αθηναίοι γιορτάζουν την απελευθέρωση της πόλης τους, Οκτώβριος 1944.jpg',
+    width: 960,
+    height: 1004,
+    author: 'Hellenic Ministry of Foreign Affairs',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    caption: {
+      en: 'Athenians celebrate the liberation of their city, October 1944',
+      el: 'Αθηναίοι γιορτάζουν την απελευθέρωση της πόλης τους, Οκτώβριος 1944',
+    },
+  },
+  'flag-1944': {
+    file: 'Η ελληνική σημαία μεταφέρεται για να υψωθεί στην Ακρόπολη μετά την απελευθέρωση της Αθήνας, Οκτώβριος 1944.jpg',
+    width: 960,
+    height: 682,
+    author: 'Hellenic Ministry of Foreign Affairs',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    caption: {
+      en: 'The Greek flag is carried up to be raised on the Acropolis after the liberation of Athens, October 1944',
+      el: 'Η ελληνική σημαία μεταφέρεται για να υψωθεί στην Ακρόπολη μετά την απελευθέρωση της Αθήνας, Οκτώβριος 1944',
+    },
+  },
+  'gorgopotamos': {
+    file: 'Gorgopotamos Bridge 1.jpg',
+    width: 960,
+    height: 720,
+    author: 'George Terezakis',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    caption: {
+      en: 'The railway viaduct at Gorgopotamos today',
+      el: 'Η σιδηροδρομική γέφυρα του Γοργοποτάμου σήμερα',
+    },
+  },
+  'damaskinos': {
+    file: 'Archbishop Damaskinos of Greece.jpg',
+    width: 462,
+    height: 600,
+    author: 'kessel',
+    license: 'CC0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/deed.en',
+    caption: {
+      en: 'Archbishop Damaskinos of Athens, 1945',
+      el: 'Ο αρχιεπίσκοπος Αθηνών Δαμασκηνός, 1945',
+    },
+  },
+  'partisans': {
+    file: 'Αντάρτες του ΕΑΜ-ΕΛΑΣ.jpg',
+    width: 960,
+    height: 735,
+    author: 'Sgt. Johnson; via the Hellenic Ministry of Foreign Affairs',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    caption: {
+      en: 'Young partisans of ELAS on Mount Parnitha',
+      el: 'Νεαροί αντάρτες του ΕΛΑΣ στην Πάρνηθα',
+    },
+  },
+  'thessaloniki-jews': {
+    file: 'Bundesarchiv Bild 101I-168-0894-21A, Griechenland, Saloniki, Erfassung von Juden.jpg',
+    width: 800,
+    height: 507,
+    author: 'Bundesarchiv, Bild 101I-168-0894-21A / Dick',
+    license: 'CC BY-SA 3.0 de',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/de/deed.en',
+    caption: {
+      en: 'The Jews of Thessaloniki forced to register by the German occupiers, July 1942',
+      el: 'Οι Εβραίοι της Θεσσαλονίκης υποχρεώνονται σε καταγραφή από τους Γερμανούς κατακτητές, Ιούλιος 1942',
+    },
+  },
+  'kandanos-sign': {
+    file: 'Bundesarchiv Bild 101I-779-0003-22, Griechenland, Schild über Zerstörung von Kandanos.jpg',
+    width: 511,
+    height: 800,
+    author: 'Bundesarchiv, Bild 101I-779-0003-22 / Seegers',
+    license: 'CC BY-SA 3.0 de',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/de/deed.en',
+    caption: {
+      en: 'German sign at Kandanos, Crete, announcing that the village was destroyed in reprisal',
+      el: 'Γερμανική πινακίδα στην Κάντανο της Κρήτης που ανακοινώνει την καταστροφή του χωριού ως αντίποινα',
+    },
+  },
+  'rimini-brigade': {
+    file: 'III Greek Mountain Brigade in North Africa.jpg',
+    width: 958,
+    height: 598,
+    author: 'Unknown author',
+    license: 'Public domain',
+    caption: {
+      en: 'Men of the Greek 3rd Mountain Brigade in North Africa, 1944',
+      el: 'Άνδρες της ΙΙΙ Ελληνικής Ορεινής Ταξιαρχίας στη Βόρεια Αφρική, 1944',
+    },
+  },
+  'rhodes-liberation': {
+    file: 'The Liberation of Rhodes, 1945 E30943.jpg',
+    width: 800,
+    height: 790,
+    author: 'Sgt. Trevor Hawkins, No. 1 Army Film & Photographic Unit',
+    license: 'Public domain',
+    caption: {
+      en: 'General Wagener signs the surrender of the German forces of the Dodecanese at Symi, May 1945',
+      el: 'Ο στρατηγός Βάγκενερ υπογράφει στη Σύμη την παράδοση των γερμανικών δυνάμεων της Δωδεκανήσου, Μάιος 1945',
+    },
+  },
+} satisfies Record<string, ImageInfo>;
+
+export type ImageSlug = keyof typeof images;

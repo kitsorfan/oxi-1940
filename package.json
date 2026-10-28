@@ -1,0 +1,38 @@
+{
+  "name": "oxi-1940",
+  "version": "1.0.0",
+  "description": "A bilingual (English / Greek) history quiz for Ochi Day: 100 questions on the Greek struggle of 1940–1941, with photos and maps from Wikimedia Commons.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Kitsos Orfanopoulos",
+  "homepage": "https://kitsorfan.github.io/oxi-1940/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kitsorfan/oxi-1940.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@fontsource/fira-sans-extra-condensed": "5.3.0",
+    "@fontsource/literata": "5.3.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.4"
+  }
+}
