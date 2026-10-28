@@ -25,9 +25,9 @@ export const BULLETIN: { text: L; at: number }[] = [
   },
 ];
 
+/** Credited, with its source, in src/data/sounds.ts. */
 export const RECORDING = {
   src: 'communique-1940.m4a',
-  youtube: 'https://www.youtube.com/watch?v=RnAPb6-UEFY',
 };
 
 /** Which line is being read at `time` seconds: -1 for the opening announcement. */

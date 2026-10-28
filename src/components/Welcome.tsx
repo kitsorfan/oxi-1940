@@ -1,5 +1,4 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
-import { RECORDING } from '../game/radio';
 import { sfx } from '../game/sound';
 import { useLang } from '../i18n/LangContext';
 import { AUTHOR_URL } from '../i18n/strings';
@@ -76,11 +75,6 @@ export function Welcome({ onClose }: { onClose: () => void }) {
         </button>
         <p className="welcome__credit">
           {s('madeBy')} Kitsos Orfanopoulos (<a href={AUTHOR_URL}>www.kitsorfan.com</a>)
-          <br />
-          {s('radioSource')}{' '}
-          <a href={RECORDING.youtube} target="_blank" rel="noreferrer">
-            YouTube
-          </a>
         </p>
       </div>
     </div>

@@ -49,11 +49,6 @@ export const strings = {
   radioStop: t('Switch off', 'Κλείσιμο'),
   radioOnAir: t('On air', 'Στον αέρα'),
   radioTap: t('Tap anywhere to tune in to the morning of 28 October 1940.', 'Πάτα οπουδήποτε για να συντονιστείς στο πρωινό της 28ης Οκτωβρίου 1940.'),
-  radioReplay: t('Listen again', 'Άκου ξανά'),
-  radioSource: t(
-    'Archive recording of the public radio, 1940 (public domain). Source of the copy:',
-    'Αρχειακή ηχογράφηση του κρατικού ραδιοφώνου, 1940 (κοινό κτήμα). Πηγή αντιγράφου:',
-  ),
   howToPlay: t('How to play', 'Πώς παίζεται'),
   chaptersTitle: t('Choose your mission', 'Διάλεξε αποστολή'),
   chapter: t('Chapter', 'Κεφάλαιο'),
