@@ -10,7 +10,7 @@
 
 **[▶ Play now: kitsorfan.github.io/oxi-1940](https://kitsorfan.github.io/oxi-1940/)**
 
-<img src="docs/screenshots/phones.jpg" alt="The quiz on a phone: home screen, a photo question with the 50:50 lifeline, a map question in Greek and the gold medal screen" width="100%">
+<img src="docs/screenshots/phones.jpg" alt="The quiz on a phone: home screen with the 1940 broadcast on air, a photo question with the 50:50 help, a map question in Greek with Ask the company and the gold medal screen" width="100%">
 
 </div>
 
